@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <main className="grid place-items-center h-screen bg-[#1B1918] text-[#B26021]">
+    <main className="grid place-items-center h-screen">
       <div className="text-center flex flex-col items-center justify-center gap-6">
         <h1 className="text-6xl sm:text-8xl">Project Manzanar</h1>
 
