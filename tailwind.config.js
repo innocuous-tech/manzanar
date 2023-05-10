@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     boxShadow: {
       drop: '0px 1px 8px rgba(0, 0, 0, 0.25)',
+      overlay: '0px 4px 13px 1px rgba(0, 0, 0, 0.25)',
     },
     colors: {
       cream: '#DEDBCD',
@@ -17,9 +18,36 @@ module.exports = {
       player: '#C3AF9F',
       ichiro: '#FD984B',
       darkBrownText: '#462f1d',
-      darkBrownOverlay: '#26201985',
+      darkBrownOverlay: 'rgba(38, 32, 25, 0.85)',
+      // darkBrownOverlay: '#26201985',
       black: '#1b1918',
       menuOverlay: '#1b1918',
+    },
+    extend: {
+      keyframes: {
+        toFullOpacity: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        toNoOpacity: {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
+        },
+        dialogContentShow: {
+          from: { opacity: 0, transform: 'translate(-50%, -50%) scale(0.97)' },
+          to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+        },
+        dialogContentHide: {
+          from: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+          to: { opacity: 0, transform: 'translate(-50%, -50%) scale(0.97)' },
+        },
+      },
+      animation: {
+        toFullOpacity: 'toFullOpacity 150ms linear',
+        toNoOpacity: 'toNoOpacity 150ms linear',
+        dialogContentShow: 'dialogContentShow 150ms linear',
+        dialogContentHide: 'dialogContentHide 150ms linear',
+      },
     },
   },
   plugins: [

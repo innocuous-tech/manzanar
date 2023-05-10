@@ -7,6 +7,7 @@ import { ReactComponent as XIcon } from 'public/icons/x.svg';
 
 import { AutoExpandingTextArea } from '@/components/AutoExpandingTextArea';
 import { Button } from '@/components/Button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/Dialog';
 import { IconButton } from '@/components/IconButton';
 import { Tooltip } from '@/components/Tooltip';
 import clsx from 'clsx';
@@ -150,6 +151,98 @@ export default function Page() {
             Kenobi!!! (hover me)
           </span>
         </Tooltip>
+      </DSSection>
+
+      <DSSection title="Dialog">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>Open Dialog</Button>
+          </DialogTrigger>
+
+          <DialogContent>
+            <h6 className="text-5xl text-ichiro">
+              Dialog With Scrollable Content
+            </h6>
+
+            <div className="[&>p]:my-12">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                nec justo auctor, hendrerit nunc nec, vehicula mauris. Curabitur
+                turpis justo, varius ac arcu nec, scelerisque interdum nibh.
+                Quisque consectetur quis sem fermentum placerat. In hac
+                habitasse platea dictumst. Ut vitae molestie lorem. Mauris
+                consectetur justo nec libero sagittis aliquam. Mauris luctus vel
+                nibh a pretium.
+              </p>
+
+              <p>
+                Sed sit amet blandit eros. Nullam varius sit amet ipsum quis
+                efficitur. Etiam rhoncus, felis vitae sodales tristique, urna
+                mauris mollis dolor, ut elementum turpis arcu malesuada nibh.
+                Sed laoreet blandit enim nec interdum. Aenean non quam non orci
+                euismod malesuada. Pellentesque blandit placerat efficitur.
+                Aliquam dignissim urna sed bibendum lacinia. Sed in dolor
+                rhoncus, porta dolor eu, varius metus. Nunc sem diam, suscipit
+                eget lacus id, venenatis efficitur libero. Vestibulum molestie
+                pulvinar mi, in ullamcorper urna. Vivamus quis interdum est. Nam
+                posuere ligula ut metus tristique efficitur. Nulla magna leo,
+                porttitor nec scelerisque ut, gravida ac felis.
+              </p>
+
+              <p>
+                Morbi tempus scelerisque erat, cursus condimentum dolor maximus
+                ac. Suspendisse maximus fringilla nisi, vel vulputate lacus
+                cursus sed. Mauris rhoncus tempor lectus a ultricies. Aenean non
+                elementum dui. Pellentesque eu sagittis ex. Nullam vestibulum,
+                magna vel auctor ultricies, ipsum mauris mollis nibh, in
+                pellentesque lectus risus eget tortor. In quis fringilla quam,
+                sed aliquam est. Maecenas sed luctus felis, sed placerat ipsum.
+              </p>
+
+              <p>
+                Morbi tempus scelerisque erat, cursus condimentum dolor maximus
+                ac. Suspendisse maximus fringilla nisi, vel vulputate lacus
+                cursus sed. Mauris rhoncus tempor lectus a ultricies. Aenean non
+                elementum dui. Pellentesque eu sagittis ex. Nullam vestibulum,
+                magna vel auctor ultricies, ipsum mauris mollis nibh, in
+                pellentesque lectus risus eget tortor. In quis fringilla quam,
+                sed aliquam est. Maecenas sed luctus felis, sed placerat ipsum.
+              </p>
+
+              <p>
+                Morbi tempus scelerisque erat, cursus condimentum dolor maximus
+                ac. Suspendisse maximus fringilla nisi, vel vulputate lacus
+                cursus sed. Mauris rhoncus tempor lectus a ultricies. Aenean non
+                elementum dui. Pellentesque eu sagittis ex. Nullam vestibulum,
+                magna vel auctor ultricies, ipsum mauris mollis nibh, in
+                pellentesque lectus risus eget tortor. In quis fringilla quam,
+                sed aliquam est. Maecenas sed luctus felis, sed placerat ipsum.
+              </p>
+
+              <p>
+                Sed vestibulum ipsum vitae eros ullamcorper laoreet. Morbi nulla
+                elit, lobortis ullamcorper lorem vel, posuere facilisis lorem.
+                Morbi ac velit metus. Integer vestibulum augue vitae eleifend
+                ultrices. Fusce ullamcorper placerat nisi, eget pulvinar sapien
+                tincidunt sit amet. Maecenas tristique mauris sit amet sapien
+                sollicitudin tristique. Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Quisque iaculis maximus diam ac elementum.
+                Nullam sed orci sit amet turpis scelerisque auctor vitae eget
+                arcu. Nam volutpat, lacus at imperdiet rhoncus, lectus mauris
+                condimentum metus, nec fermentum mauris justo et nulla.
+              </p>
+
+              <p>
+                Aenean luctus mauris at erat interdum ullamcorper. Maecenas a
+                massa lectus. Phasellus laoreet augue eget massa elementum
+                vulputate. Ut pretium, ante vitae iaculis blandit, nisi velit
+                scelerisque eros, sit amet tincidunt lectus lectus tempus ante.
+                Quisque mattis iaculis aliquet. Cras molestie pretium lorem, ac
+                euismod neque pharetra eu. Vestibulum molestie fermentum est.
+              </p>
+            </div>
+          </DialogContent>
+        </Dialog>
       </DSSection>
     </main>
   );

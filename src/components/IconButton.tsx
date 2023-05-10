@@ -6,24 +6,29 @@ import { ButtonHTMLAttributes } from 'react';
 export const IconButton = ({
   className,
   label,
+  hasTooltip = true,
   ...props
 }: Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'aria-label'> & {
   children: JSX.Element;
   label: string;
+  /** @default true */
+  hasTooltip?: boolean;
 }) => {
-  return (
-    <Tooltip content={label}>
-      <Button
-        className={clsx(
-          className,
-          '[&>svg]:h-10',
-          '[&>svg]:w-10',
-          '!p-6',
-          'bg-darkBrownOverlay',
-        )}
-        aria-label={label}
-        {...props}
-      />
-    </Tooltip>
+  const button = (
+    <Button
+      className={clsx(
+        className,
+        '[&>svg]:h-10',
+        '[&>svg]:w-10',
+        '!p-6',
+        'bg-darkBrownOverlay',
+      )}
+      aria-label={label}
+      {...props}
+    />
   );
+
+  if (!hasTooltip) return button;
+
+  return <Tooltip content={label}>{button}</Tooltip>;
 };
