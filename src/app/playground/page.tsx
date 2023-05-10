@@ -8,6 +8,7 @@ import { ReactComponent as XIcon } from 'public/icons/x.svg';
 import { AutoExpandingTextArea } from '@/components/AutoExpandingTextArea';
 import { Button } from '@/components/Button';
 import { IconButton } from '@/components/IconButton';
+import { Tooltip } from '@/components/Tooltip';
 import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 import { theme } from '../../../tailwind.config';
@@ -125,9 +126,12 @@ export default function Page() {
 
       <DSSection title="Buttons">
         <div className="flex flex-col items-start gap-3">
+          <span>Icon Buttons always have a tooltip!</span>
+
           <Button>Some Button</Button>
           <Button disabled>Some Disabled Button</Button>
-          <IconButton>
+
+          <IconButton label="Open Menu">
             <Menu />
           </IconButton>
         </div>
@@ -138,6 +142,14 @@ export default function Page() {
           label="Type here"
           placeholder="Type something to say to Ichiro"
         />
+      </DSSection>
+
+      <DSSection title="Tooltip">
+        <Tooltip content="Hello there!">
+          <span className="mt-[5rem] hover:cursor-pointer">
+            Kenobi!!! (hover me)
+          </span>
+        </Tooltip>
       </DSSection>
     </main>
   );

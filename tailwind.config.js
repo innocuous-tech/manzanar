@@ -26,7 +26,7 @@ module.exports = {
     plugin(({ addComponents }) => {
       addComponents({
         '.panel': {
-          '@apply rounded-xl shadow-drop flex flex-col p-6 bg-darkBrownOverlay':
+          '@apply rounded-xl shadow-drop flex flex-col items-start p-6 bg-darkBrownOverlay':
             {},
         },
         '.typography-title': {
