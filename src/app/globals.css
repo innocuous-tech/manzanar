@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* Firefox */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.cream') theme('colors.creamSemi');
+  }
+
+  /* Chrome, Edge, and Safari */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+    scroll-margin: 1rem;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: theme('colors.creamSemi');
+    border-radius: theme('borderRadius.full');
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: theme('colors.cream');
+    border-radius: theme('borderRadius.full');
+  }
+
+  /* Auto-Expanding Textarea */
+  .auto-expanding-textarea,
+  .auto-expanding-textarea-parent::after {
+    @apply col-start-1 col-end-2 row-start-1 row-end-2;
+    @apply h-full max-h-[6rem] min-h-[1rem] w-full;
+    @apply resize-none;
+    @apply bg-darkBrownOverlay text-[inherit] caret-[currentColor];
+    @apply overflow-y-auto;
+    @apply whitespace-pre-wrap break-words;
+    @apply outline-none;
+    @apply placeholder:opacity-80;
+    @apply text-4xl;
+    @apply p-1;
+  }
+
+  /* Auto-Expanding Textarea ::after pseudoelement. */
+  .auto-expanding-textarea-parent {
+    @apply grid rounded-xl;
+    @apply after:invisible;
+  }
+}

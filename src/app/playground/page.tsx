@@ -5,6 +5,7 @@ import { ReactComponent as Send } from 'public/icons/send.svg';
 import { ReactComponent as Transcript } from 'public/icons/transcript.svg';
 import { ReactComponent as XIcon } from 'public/icons/x.svg';
 
+import { AutoExpandingTextArea } from '@/components/AutoExpandingTextArea';
 import { Button } from '@/components/Button';
 import { IconButton } from '@/components/IconButton';
 import clsx from 'clsx';
@@ -60,7 +61,7 @@ export default function Page() {
        * PostCSS strips them. We have used all of them (invisibly) so that they are not
        * considered unused classes.
        */}
-      <div className="typography-title typography-body typography-button typography-tooltip typography-clipboard typography-name invisible bg-black bg-cream bg-creamSemi bg-darkBrownOverlay bg-darkBrownText bg-ichiro bg-menuOverlay bg-player text-black text-cream text-creamSemi text-darkBrownOverlay text-darkBrownText text-ichiro text-menuOverlay text-player" />
+      <div className="typography-title typography-body typography-button typography-tooltip typography-name typography-clipboard invisible bg-black bg-cream bg-creamSemi bg-darkBrownOverlay bg-darkBrownText bg-ichiro bg-menuOverlay bg-player text-black text-cream text-creamSemi text-darkBrownOverlay text-darkBrownText text-ichiro text-menuOverlay text-player" />
 
       <h1 className="text-5xl font-bold">Design System</h1>
 
@@ -130,6 +131,13 @@ export default function Page() {
             <Menu />
           </IconButton>
         </div>
+      </DSSection>
+
+      <DSSection title="Form Inputs">
+        <AutoExpandingTextArea
+          label="Type here"
+          placeholder="Type something to say to Ichiro"
+        />
       </DSSection>
     </main>
   );
