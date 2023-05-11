@@ -18,9 +18,12 @@ export const IconButton = ({
     <Button
       className={clsx(
         className,
-        '[&>svg]:h-10',
-        '[&>svg]:w-10',
-        '!p-6',
+        'sm:[&>svg]:h-10',
+        'sm:[&>svg]:w-10',
+        '[&>svg]:h-8',
+        '[&>svg]:w-8',
+        '!sm:p-6',
+        '!p-4',
         'bg-darkBrownOverlay',
       )}
       aria-label={label}
