@@ -46,3 +46,7 @@
     @apply after:invisible;
   }
 }
+
+a {
+  outline: none;
+}
