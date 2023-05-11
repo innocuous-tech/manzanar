@@ -12,7 +12,7 @@ import { IconButton } from '@/components/IconButton';
 import { Tooltip } from '@/components/Tooltip';
 import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
-import { theme } from '../../../tailwind.config';
+import { theme } from '../../../../tailwind.config';
 
 const DSSection = ({
   title,
