@@ -28,7 +28,7 @@ export const IchiroAvatar = () => {
   const currentNumber = useIncrementingValue({ x: 1, y: 8 });
 
   return (
-    <div className="absolute inset-0 top-[unset] flex h-full w-full items-end justify-center overflow-hidden overflow-clip">
+    <div className="pointer-events-none absolute inset-0 top-[unset] flex h-full w-full items-end justify-center overflow-hidden overflow-clip">
       <AnimatePresence mode="popLayout">
         <motion.img
           src={`/images/ichiro/draft${currentNumber}.png`}
