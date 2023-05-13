@@ -9,12 +9,8 @@ export default function Page() {
         <span className="text-ichiro">Ichiro</span>
       </h1>
 
-      <Link href="/experience/ichiro/start">
-        <Button>Start</Button>
-      </Link>
-
       <Link href="/experience/media/video-1">
-        <Button>Watch Video 1</Button>
+        <Button>Start</Button>
       </Link>
     </div>
   );
