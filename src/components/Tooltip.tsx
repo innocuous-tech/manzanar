@@ -14,7 +14,7 @@ export const Tooltip = ({
         <TooltipPrimitive.Content
           side="top"
           align="center"
-          className="rounded-xl bg-darkBrownOverlay p-6 italic text-cream"
+          className="typography-tooltip rounded-xl bg-darkBrownOverlay p-6"
           sideOffset={12}
         >
           {content}
