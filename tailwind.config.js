@@ -21,7 +21,7 @@ module.exports = {
       darkBrownOverlay: 'rgba(38, 32, 25, 0.85)',
       // darkBrownOverlay: '#26201985',
       black: '#1b1918',
-      menuOverlay: '#1b1918',
+      menuOverlay: '#1b1918e6',
     },
     extend: {
       keyframes: {
@@ -61,6 +61,12 @@ module.exports = {
           '@apply text-[3rem]': {} /* 48px */,
           lineHeight: '1.15',
         },
+        '.typography-bio': {
+          '@apply text-[1.75rem]': {} /* 28px */,
+        },
+        '.typography-social': {
+          '@apply text-2xl underline italic': {} /* 24px */,
+        },
         '.typography-body': {
           '@apply text-[2.25rem]': {} /* 36px */,
           lineHeight: '1.15',
@@ -70,7 +76,7 @@ module.exports = {
           lineHeight: '1.15',
         },
         '.typography-tooltip': {
-          '@apply text-[1.5rem] italic': {} /* 24px */,
+          '@apply text-2xl italic text-cream': {} /* 24px */,
           lineHeight: '1.15',
         },
         '.typography-name': {
