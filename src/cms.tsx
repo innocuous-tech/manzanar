@@ -1,4 +1,11 @@
-export const strings = {
+export const cms = {
+  start: (
+    <>
+      This is <span className="inline text-ichiro">Ichiro</span>. Your job is to
+      get his answers to question 27 and 28 of the loyalty questionnaire. And
+      once you do, process him.
+    </>
+  ),
   '0.0': `Hi. Let’s make this quick, alright?`,
   '2.4_yes27': `Hey. Give me that clipboard. My answer to question 27 isn’t "yes". I will not risk my life for a country that doesn’t value mine. It’s no.`,
   '2.4_yes28': `Are you kidding me? Give me that clipboard. My answer is no. I’m American. I can’t "forswear" allegiance to an emperor I’ve never sworn allegiance to.`,
