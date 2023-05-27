@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -24,7 +25,7 @@ const useIncrementingValue = ({ x, y }: UseIncrementingValueProps): number => {
   return value;
 };
 
-export const IchiroAvatar = () => {
+export const RotatingIchiroAvatar = () => {
   const currentNumber = useIncrementingValue({ x: 1, y: 8 });
 
   return (
@@ -42,5 +43,44 @@ export const IchiroAvatar = () => {
         />
       </AnimatePresence>
     </div>
+  );
+};
+
+export type IchiroVariant =
+  | 'neutral'
+  | 'side-eye'
+  | 'crossed-arms-disbelief'
+  | 'fists-together-aversion'
+  | 'ear-grab'
+  | 'interlaced-fingers'
+  | 'pointing-at-user'
+  | 'crossed-arms-unmoved';
+
+export interface IchiroAvatarProps {
+  variant: IchiroVariant;
+}
+
+const variantDraftMap: {
+  [key in IchiroVariant]: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+} = {
+  neutral: 1,
+  'side-eye': 2,
+  'crossed-arms-disbelief': 3,
+  'fists-together-aversion': 4,
+  'ear-grab': 5,
+  'interlaced-fingers': 6,
+  'pointing-at-user': 7,
+  'crossed-arms-unmoved': 8,
+};
+
+export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
+  const draftNumber = variantDraftMap[variant] ?? 1;
+
+  return (
+    <img
+      src={`/images/ichiro/draft${draftNumber}.png`}
+      alt=""
+      className="h-auto w-[max(500px,60%)] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh]"
+    />
   );
 };

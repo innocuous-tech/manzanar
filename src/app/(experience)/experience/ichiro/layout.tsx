@@ -1,6 +1,6 @@
-import { IchiroAvatar } from '@/app/(experience)/_components/IchiroAvatar';
 import { MenuDialogContent } from '@/app/(experience)/_components/MenuDialogContent';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/Dialog';
+import { RotatingIchiroAvatar } from '@/components/IchiroAvatar';
 import { IconButton } from '@/components/IconButton';
 import { Tooltip } from '@/components/Tooltip';
 import { ReactComponent as MenuIcon } from 'public/icons/menu.svg';
@@ -36,7 +36,7 @@ export default function IchiroLayout({ children }: PropsWithChildren<{}>) {
       <div className="mx-auto p-4 pt-[6rem] sm:max-w-[calc(100%-(64px*3))] sm:px-16 sm:py-8">
         {children}
 
-        <IchiroAvatar />
+        <RotatingIchiroAvatar />
       </div>
     </div>
   );
