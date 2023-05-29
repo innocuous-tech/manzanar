@@ -7,31 +7,26 @@ import { useForm } from 'react-hook-form';
 
 const IDENTIFIER = 'aetextarea';
 
+type FormData = {
+  [IDENTIFIER]: string;
+};
+
 interface AutoExpandingTextAreaProps
   extends Omit<
     TextareaHTMLAttributes<HTMLTextAreaElement>,
     'name' | 'id' | 'onSubmit'
   > {
-  // onSubmit: (data: FormData) => void;
+  onSubmit: (data: FormData) => void;
   label: string;
 }
-
-type FormData = {
-  [IDENTIFIER]: string;
-};
 
 export const AutoExpandingTextArea = ({
   label,
   placeholder,
+  onSubmit,
   ...props
 }: AutoExpandingTextAreaProps) => {
   const { register, handleSubmit, watch } = useForm<FormData>();
-
-  /**
-   * TODO: Require `action` prop and use Server Actions
-   * @see https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions
-   */
-  const onSubmit = ({ aetextarea }: FormData) => window.alert(aetextarea);
 
   const value = watch(IDENTIFIER);
 
@@ -56,7 +51,10 @@ export const AutoExpandingTextArea = ({
         data-testid="1"
       >
         <textarea
+          {...props}
           {...register(IDENTIFIER)}
+          id={IDENTIFIER}
+          name={IDENTIFIER}
           className="auto-expanding-textarea custom-scrollbar"
           onKeyDown={(event) => {
             const isHoldingShift = event.shiftKey === true;

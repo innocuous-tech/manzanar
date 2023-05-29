@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactComponent as ChevronLeft } from 'public/icons/chevron-left.svg';
 import { ReactComponent as DownwardTriangle } from 'public/icons/downward-triangle.svg';
 import { ReactComponent as Menu } from 'public/icons/menu.svg';

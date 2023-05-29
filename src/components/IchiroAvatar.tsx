@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -35,7 +36,7 @@ export const RotatingIchiroAvatar = () => {
           src={`/images/ichiro/draft${currentNumber}.png`}
           key={`ichiro-${currentNumber}`}
           alt=""
-          className="h-auto w-[max(500px,60%)] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh]"
+          className="h-auto w-[90vh] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh] md:w-[max(500px,75%)] md:max-w-[70rem]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -77,10 +78,21 @@ export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
   const draftNumber = variantDraftMap[variant] ?? 1;
 
   return (
-    <img
-      src={`/images/ichiro/draft${draftNumber}.png`}
-      alt=""
-      className="h-auto w-[max(500px,60%)] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh]"
-    />
+    <AnimatePresence>
+      <motion.div
+        key={`static-${variant}`}
+        className="pointer-events-none absolute inset-0 top-[unset] flex h-full w-full items-end justify-center overflow-hidden overflow-clip"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <img
+          src={`/images/ichiro/draft${draftNumber}.png`}
+          alt=""
+          className="h-auto w-[90vh] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh] md:w-[max(500px,75%)] md:max-w-[70rem]"
+        />
+      </motion.div>
+    </AnimatePresence>
   );
 };
