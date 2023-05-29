@@ -31,7 +31,7 @@
     @apply col-start-1 col-end-2 row-start-1 row-end-2;
     @apply h-full max-h-[6rem] min-h-[1rem] w-full;
     @apply resize-none;
-    @apply bg-darkBrownOverlay text-[inherit] caret-[currentColor];
+    @apply bg-[transparent] text-[inherit] caret-[currentColor];
     @apply overflow-y-auto;
     @apply whitespace-pre-wrap break-words;
     @apply outline-none;
