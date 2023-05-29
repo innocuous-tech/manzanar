@@ -21,10 +21,18 @@ module.exports = {
       darkBrownOverlay: 'rgba(38, 32, 25, 0.85)',
       // darkBrownOverlay: '#26201985',
       black: '#1b1918',
-      menuOverlay: '#1b1918',
+      menuOverlay: '#1b1918e6',
     },
     extend: {
       keyframes: {
+        // bobble: {
+        //   0: { transform: 'translateY(0px)' },
+        //   20: { transform: 'translateY(-10px)' },
+        //   40: { transform: 'translateY(0px)' },
+        //   60: { transform: 'translateY(10px)' },
+        //   80: { transform: 'translateY(0px)' },
+        //   100: { transform: 'translateY(0px)' },
+        // },
         toFullOpacity: {
           from: { opacity: 0 },
           to: { opacity: 1 },
@@ -43,6 +51,7 @@ module.exports = {
         },
       },
       animation: {
+        // bobble: 'bobble 2s ease-in-out infinite',
         toFullOpacity: 'toFullOpacity 150ms linear',
         toNoOpacity: 'toNoOpacity 150ms linear',
         dialogContentShow: 'dialogContentShow 150ms linear',
@@ -57,9 +66,19 @@ module.exports = {
           '@apply rounded-xl shadow-drop flex flex-col items-start p-6 bg-darkBrownOverlay':
             {},
         },
+        '.bottom-panel': {
+          '@apply rounded-xl shadow-drop flex flex-col items-start p-6 bg-darkBrownOverlay relative gap-3 px-[3.75rem] pb-16 pt-12':
+            {},
+        },
         '.typography-title': {
           '@apply text-[3rem]': {} /* 48px */,
           lineHeight: '1.15',
+        },
+        '.typography-bio': {
+          '@apply text-[1.75rem]': {} /* 28px */,
+        },
+        '.typography-social': {
+          '@apply text-2xl underline italic': {} /* 24px */,
         },
         '.typography-body': {
           '@apply text-[2.25rem]': {} /* 36px */,
@@ -70,15 +89,16 @@ module.exports = {
           lineHeight: '1.15',
         },
         '.typography-tooltip': {
-          '@apply text-[1.5rem] italic': {} /* 24px */,
+          '@apply text-xl sm:text-2xl italic text-cream': {} /* 24px */,
           lineHeight: '1.15',
         },
         '.typography-name': {
-          '@apply text-[2.5rem]': {} /* 40px */,
+          '@apply text-[1.5rem] sm:text-[2.5rem] uppercase': {} /* 40px */,
           lineHeight: '1.15',
         },
         '.typography-clipboard': {
-          '@apply text-[2rem]': {} /* 32px */,
+          '@apply text-2xl':
+            {} /* TODO: Supposed to be 32px [2rem], but it was to big */,
           lineHeight: '1.15',
           fontFamily: `'Courier New', Courier, monospace`,
           letterSpacing: '-5%',
