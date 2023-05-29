@@ -1,6 +1,20 @@
-import { InworldService, userName } from '@/InworldClient';
+'use client';
+
+import type {
+  HistoryItem,
+  InworldConnectionService,
+  InworldPacket,
+} from '@inworld/web-sdk';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
+interface InworldServiceProps {
+  onHistoryChange?: (history: HistoryItem[]) => void;
+  onMessage: (packet: InworldPacket) => void;
+  onReady?: () => void;
+  onDisconnect?: () => void;
+}
+
+const userName = 'Mister';
 const id = `${Math.random()}`;
 
 export function useIchiro({
@@ -24,9 +38,47 @@ export function useIchiro({
 
   useEffect(() => {
     if (!hasRenderedRef.current) {
-      const askIchiroQ27 = async () => {
+      const askIchiro = async () => {
+        const { InworldClient } = await import('@inworld/web-sdk');
+
+        class InworldService {
+          connection: InworldConnectionService;
+
+          constructor(props: InworldServiceProps) {
+            const client = new InworldClient()
+              .setConfiguration({
+                capabilities: {
+                  emotions: true,
+                  audio: false,
+                  phonemes: false,
+                  silence: false,
+                  interruptions: false,
+                  narratedActions: false,
+                },
+              })
+              .setUser({ fullName: userName, id })
+              .setScene(process.env.NEXT_PUBLIC_INWORLD_SCENE!)
+              .setGenerateSessionToken(this.generateSessionToken)
+              .setOnError((err) => console.log(err))
+              .setOnHistoryChange(props.onHistoryChange)
+              .setOnMessage((packet) => {
+                props.onMessage(packet);
+                if (packet.isInteractionEnd()) this.connection?.close();
+              })
+              .setOnReady(props.onReady)
+              .setOnDisconnect(props.onDisconnect);
+
+            this.connection = client.build();
+          }
+
+          private async generateSessionToken() {
+            const response = await fetch('/api/initInworld');
+
+            return response.json();
+          }
+        }
+
         const service = new InworldService({
-          id,
           onMessage: (message) => {
             let text = message?.text?.text;
 
@@ -51,11 +103,11 @@ export function useIchiro({
           },
         });
 
-        await service.connection.isActive();
-        await service.connection.sendText(messageToSend);
+        await service.connection?.isActive();
+        await service.connection?.sendText(messageToSend);
       };
 
-      askIchiroQ27();
+      askIchiro();
     }
 
     hasRenderedRef.current = true;

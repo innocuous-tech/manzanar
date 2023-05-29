@@ -154,6 +154,7 @@ export default function Page() {
 
       <DSSection title="Form Inputs">
         <AutoExpandingTextArea
+          onSubmit={() => {}}
           label="Type here"
           placeholder="Type something to say to Ichiro"
         />
