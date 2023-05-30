@@ -1,7 +1,7 @@
 import { ContinueButton } from '@/app/(experience)/_components/ContinueButton';
+import { IchiroStatement } from '@/app/(experience)/_components/IchiroStatement';
+import { UserStatement } from '@/app/(experience)/_components/UserStatement';
 import { useIchiro } from '@/app/(experience)/_hooks/useIchiro';
-import { IchiroStatement } from '@/app/(experience)/experience/ichiro/IchiroStatement';
-import { UserStatement } from '@/app/(experience)/experience/ichiro/UserStatement';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 interface QCustomProps {

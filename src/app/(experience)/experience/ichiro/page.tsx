@@ -2,11 +2,11 @@
 
 import { ClipboardQuestion } from '@/app/(experience)/_components/ClipboardQuestion';
 import { ContinueButton } from '@/app/(experience)/_components/ContinueButton';
+import { IchiroStatement } from '@/app/(experience)/_components/IchiroStatement';
 import { Q27 } from '@/app/(experience)/_components/Q27';
 import { Q28 } from '@/app/(experience)/_components/Q28';
 import { QCustom } from '@/app/(experience)/_components/QCustom';
-import { IchiroStatement } from '@/app/(experience)/experience/ichiro/IchiroStatement';
-import { UserStatement } from '@/app/(experience)/experience/ichiro/UserStatement';
+import { UserStatement } from '@/app/(experience)/_components/UserStatement';
 import { cms } from '@/cms';
 import { AutoExpandingTextArea } from '@/components/AutoExpandingTextArea';
 import { Button } from '@/components/Button';
