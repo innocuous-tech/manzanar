@@ -27,6 +27,7 @@ export default function Page() {
             src="https://res.cloudinary.com/dprte0rm8/video/upload/v1685475575/v2_t7hdho.mp4"
             type="video/mp4"
           />
+          <track default src="/subtitles/v2.vtt" kind="captions" srcLang="en" />
           Your browser does not support the video tag.
         </video>
       </div>

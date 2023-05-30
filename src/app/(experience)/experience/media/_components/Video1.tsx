@@ -73,6 +73,12 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
                   src="https://res.cloudinary.com/dprte0rm8/video/upload/v1685475768/v1_ojzsa5.mp4"
                   type="video/mp4"
                 />
+                <track
+                  default
+                  src="/subtitles/v1.vtt"
+                  kind="captions"
+                  srcLang="en"
+                />
                 Your browser does not support the video tag.
               </motion.video>
             )}
