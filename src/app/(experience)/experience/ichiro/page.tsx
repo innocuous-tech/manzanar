@@ -76,6 +76,14 @@ export default function Page() {
     numberOfRemainingQuestions === 0 &&
     questionsAsked >= 3;
 
+  const promptProcessing = () => {
+    setTranscript((prev) => [
+      ...prev,
+      { origin: 'ichiro', message: cms['1.0'] },
+    ]);
+    setStep('process-prompt');
+  };
+
   const animationControls = useAnimationControls();
 
   useEffect(() => {
@@ -264,7 +272,7 @@ export default function Page() {
           <Q27
             setTranscript={setTranscript}
             onComplete={() =>
-              shouldProcess ? setStep('process-prompt') : setStep('0.1')
+              shouldProcess ? promptProcessing() : setStep('0.1')
             }
           />
         )}
@@ -273,7 +281,7 @@ export default function Page() {
           <Q28
             setTranscript={setTranscript}
             onComplete={() =>
-              shouldProcess ? setStep('process-prompt') : setStep('0.1')
+              shouldProcess ? promptProcessing() : setStep('0.1')
             }
           />
         )}
@@ -284,7 +292,8 @@ export default function Page() {
             setTranscript={setTranscript}
             onComplete={() => {
               setCustomQuestion('');
-              return shouldProcess ? setStep('process-prompt') : setStep('0.1');
+
+              return shouldProcess ? promptProcessing() : setStep('0.1');
             }}
           />
         )}
