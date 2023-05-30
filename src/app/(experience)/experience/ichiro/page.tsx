@@ -66,6 +66,7 @@ export default function Page() {
     setStep('custom');
   };
 
+  const numberOfRemainingQuestions = remainingQuestions.length;
   const mostRecentTranscriptEntry = transcript.at(-1);
   const isClipboardFinished =
     clipboardState[27].N === true && clipboardState[28].N === true;
@@ -73,13 +74,13 @@ export default function Page() {
   useEffect(() => {
     const shouldProcess =
       isClipboardFinished &&
-      remainingQuestions.length === 0 &&
+      numberOfRemainingQuestions === 0 &&
       questionsAsked >= 3;
 
     if (shouldProcess && step !== 'process-prompt') {
       setStep('process-prompt');
     }
-  }, [isClipboardFinished, questionsAsked]);
+  }, [isClipboardFinished, questionsAsked, numberOfRemainingQuestions, step]);
 
   const animationControls = useAnimationControls();
 
@@ -88,20 +89,6 @@ export default function Page() {
       animationControls.start({ opacity: 0 }, { duration: 0.4 }).then(() => {
         animationControls.start({ opacity: 1 }, { duration: 0.4, delay: 1.5 });
       });
-    }
-
-    if (clipboardState[27].Y === true) {
-      setTranscript((prev) => [
-        ...prev,
-        { origin: 'ichiro', message: cms['2.4_yes27'] },
-      ]);
-    }
-
-    if (clipboardState[28].Y === true) {
-      setTranscript((prev) => [
-        ...prev,
-        { origin: 'ichiro', message: cms['2.4_yes28'] },
-      ]);
     }
 
     const timeout = setTimeout(() => {
@@ -121,7 +108,7 @@ export default function Page() {
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [clipboardState]);
+  }, [animationControls, clipboardState]);
 
   return (
     <AnimatePresence mode="wait">
@@ -168,7 +155,7 @@ export default function Page() {
             )}
 
             <div className="fixed inset-0 top-[unset]">
-              {/* `right` and `scale` are directly related */}
+              {/* Clipboard Here - Note: `right` and `scale` are directly related */}
               <motion.aside
                 className="absolute -right-4 -top-[28rem] flex hidden h-[28rem] w-96 origin-bottom scale-75 flex-col bg-[url('/images/clipboard.webp')] bg-cover md:block xl:right-4 xl:scale-90 2xl:right-8 2xl:scale-100"
                 animate={animationControls}
@@ -184,16 +171,56 @@ export default function Page() {
                     <ClipboardQuestion
                       label="Question 27:"
                       fieldState={clipboardState[27]}
-                      setFieldState={(newState) =>
-                        setClipboardState((prev) => ({ ...prev, 27: newState }))
-                      }
+                      setFieldState={(newState) => {
+                        if (
+                          newState.N === true &&
+                          remainingQuestions.includes(27)
+                        ) {
+                          setTranscript((prev) => [
+                            ...prev,
+                            { origin: 'ichiro', message: cms['2.6'] },
+                          ]);
+                        }
+
+                        if (newState.Y === true) {
+                          setTranscript((prev) => [
+                            ...prev,
+                            { origin: 'ichiro', message: cms['2.4_yes27'] },
+                          ]);
+                        }
+
+                        setClipboardState((prev) => ({
+                          ...prev,
+                          27: newState,
+                        }));
+                      }}
                     />
                     <ClipboardQuestion
                       label="Question 28:"
                       fieldState={clipboardState[28]}
-                      setFieldState={(newState) =>
-                        setClipboardState((prev) => ({ ...prev, 28: newState }))
-                      }
+                      setFieldState={(newState) => {
+                        if (
+                          newState.N === true &&
+                          remainingQuestions.includes(28)
+                        ) {
+                          setTranscript((prev) => [
+                            ...prev,
+                            { origin: 'ichiro', message: cms['2.7'] },
+                          ]);
+                        }
+
+                        if (newState.Y === true) {
+                          setTranscript((prev) => [
+                            ...prev,
+                            { origin: 'ichiro', message: cms['2.4_yes28'] },
+                          ]);
+                        }
+
+                        setClipboardState((prev) => ({
+                          ...prev,
+                          28: newState,
+                        }));
+                      }}
                     />
                   </div>
                 </div>
@@ -257,7 +284,10 @@ export default function Page() {
           <QCustom
             message={customQuestion}
             setTranscript={setTranscript}
-            onComplete={() => setStep('0.1')}
+            onComplete={() => {
+              setCustomQuestion('');
+              setStep('0.1');
+            }}
           />
         )}
 

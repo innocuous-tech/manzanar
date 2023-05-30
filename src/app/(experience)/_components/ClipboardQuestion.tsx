@@ -32,9 +32,9 @@ export const ClipboardQuestion = ({
           className="flex flex-nowrap items-center gap-2"
           isDisabled={isFieldDisabled}
           checkState={fieldState.Y}
-          setCheckState={(checkState) =>
-            setFieldState({ N: false, Y: checkState })
-          }
+          setCheckState={(checkState) => {
+            setFieldState({ N: false, Y: checkState });
+          }}
         />
 
         <Checkbox
@@ -42,9 +42,9 @@ export const ClipboardQuestion = ({
           className="flex flex-nowrap items-center gap-2"
           isDisabled={isFieldDisabled}
           checkState={fieldState.N}
-          setCheckState={(checkState) =>
-            setFieldState({ N: checkState, Y: false })
-          }
+          setCheckState={(checkState) => {
+            setFieldState({ N: checkState, Y: false });
+          }}
         />
       </div>
     </fieldset>
