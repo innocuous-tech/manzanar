@@ -6,6 +6,7 @@ interface ContinueButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {}
 
 export const ContinueButton = ({
+  children,
   className,
   onClick,
   ...props
@@ -20,7 +21,7 @@ export const ContinueButton = ({
       {...props}
     >
       <span className="group-hover:underline group-focus-visible:underline">
-        Continue
+        {children ?? 'Continue'}
       </span>
 
       <DownwardTriangleIcon className="h-5 w-5 animate-bounce sm:h-6 sm:w-6" />

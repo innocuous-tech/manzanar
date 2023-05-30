@@ -35,11 +35,6 @@ export default function IchiroLayout({ children }: PropsWithChildren<{}>) {
 
       <div className="mx-auto h-full p-4 pt-[6rem] sm:max-w-[calc(100%-(64px*3))] sm:px-16 sm:py-8">
         <div className="relative z-20 h-full">{children}</div>
-        {/*
-        <AnimatedRouteTransition className="relative z-20 h-full">
-          {children}
-        </AnimatedRouteTransition>
-        */}
 
         <IchiroAvatar variant="neutral" />
       </div>
