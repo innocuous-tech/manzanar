@@ -71,16 +71,10 @@ export default function Page() {
   const isClipboardFinished =
     clipboardState[27].N === true && clipboardState[28].N === true;
 
-  useEffect(() => {
-    const shouldProcess =
-      isClipboardFinished &&
-      numberOfRemainingQuestions === 0 &&
-      questionsAsked >= 3;
-
-    if (shouldProcess && step !== 'process-prompt') {
-      setStep('process-prompt');
-    }
-  }, [isClipboardFinished, questionsAsked, numberOfRemainingQuestions, step]);
+  const shouldProcess =
+    isClipboardFinished &&
+    numberOfRemainingQuestions === 0 &&
+    questionsAsked >= 3;
 
   const animationControls = useAnimationControls();
 
@@ -269,14 +263,18 @@ export default function Page() {
         {step === 'q27' && (
           <Q27
             setTranscript={setTranscript}
-            onComplete={() => setStep('0.1')}
+            onComplete={() =>
+              shouldProcess ? setStep('process-prompt') : setStep('0.1')
+            }
           />
         )}
 
         {step === 'q28' && (
           <Q28
             setTranscript={setTranscript}
-            onComplete={() => setStep('0.1')}
+            onComplete={() =>
+              shouldProcess ? setStep('process-prompt') : setStep('0.1')
+            }
           />
         )}
 
@@ -286,7 +284,7 @@ export default function Page() {
             setTranscript={setTranscript}
             onComplete={() => {
               setCustomQuestion('');
-              setStep('0.1');
+              return shouldProcess ? setStep('process-prompt') : setStep('0.1');
             }}
           />
         )}
