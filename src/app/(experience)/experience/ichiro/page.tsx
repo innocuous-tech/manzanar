@@ -71,7 +71,10 @@ export default function Page() {
     clipboardState[27].N === true && clipboardState[28].N === true;
 
   useEffect(() => {
-    const shouldProcess = isClipboardFinished && questionsAsked >= 3;
+    const shouldProcess =
+      isClipboardFinished &&
+      remainingQuestions.length === 0 &&
+      questionsAsked >= 3;
 
     if (shouldProcess && step !== 'process-prompt') {
       setStep('process-prompt');
