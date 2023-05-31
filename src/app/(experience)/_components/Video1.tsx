@@ -62,6 +62,7 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
               <motion.video
                 autoPlay
                 controls
+                disablePictureInPicture
                 className="h-full w-full object-cover"
                 ref={videoRef}
                 initial={{ opacity: 1 }}

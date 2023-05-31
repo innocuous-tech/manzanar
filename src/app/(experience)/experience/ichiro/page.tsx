@@ -21,9 +21,6 @@ import { ReactComponent as TranscriptIcon } from 'public/icons/transcript.svg';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
-  const [isIchiroTakingClipboard, setIsIchiroTakingClipboard] =
-    useState<boolean>(false);
-
   const [clipboardState, setClipboardState] = useState<{
     27: ClipboardQuestionState;
     28: ClipboardQuestionState;

@@ -22,7 +22,12 @@ export default function Page() {
       </AnimatePresence>
 
       <div className="absolute inset-0 grid h-full w-full place-items-center overflow-clip">
-        <video autoPlay controls className="h-full w-full object-cover">
+        <video
+          autoPlay
+          controls
+          disablePictureInPicture
+          className="h-full w-full object-cover"
+        >
           <source
             src="https://res.cloudinary.com/dprte0rm8/video/upload/v1685475575/v2_t7hdho.mp4"
             type="video/mp4"
