@@ -1,4 +1,4 @@
-import { Video1 } from '@/app/(experience)/experience/media/_components/Video1';
+import { Video1 } from '@/app/(experience)/_components/Video1';
 
 export default function Page() {
   const nextPath = '/experience/ichiro';
