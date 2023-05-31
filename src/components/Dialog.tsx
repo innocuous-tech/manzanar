@@ -18,7 +18,7 @@ export const DialogContent = forwardRef<
     <DialogPrimitive.Content
       {...props}
       className={clsx(props.className, 'fixed z-30', {
-        ['left-[50%] top-[50%] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col-reverse items-end gap-6 rounded-xl bg-darkBrownOverlay p-12 shadow-overlay outline-none data-[state=closed]:animate-dialogContentHide data-[state=open]:animate-dialogContentShow sm:block sm:h-[calc(100%-8rem)] sm:w-[calc(100%-18rem)] sm:rounded-xl md:w-[calc(100%-24rem)]']:
+        ['left-[50%] top-[50%] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col-reverse items-end gap-6 rounded-xl bg-darkBrownOverlay py-12 pl-14 pr-6 shadow-overlay outline-none data-[state=closed]:animate-dialogContentHide data-[state=open]:animate-dialogContentShow sm:block sm:h-[calc(100%-8rem)] sm:w-[calc(100%-18rem)] sm:rounded-xl md:w-[calc(100%-24rem)]']:
           variant === 'default',
         ['inset-0 grid h-screen w-screen place-items-center bg-menuOverlay data-[state=closed]:animate-toNoOpacity data-[state=open]:animate-toFullOpacity']:
           variant === 'full-screen-overlay',
@@ -36,7 +36,7 @@ export const DialogContent = forwardRef<
       <DialogPrimitive.Close asChild>
         <IconButton
           className={clsx({
-            ['sm:absolute sm:-right-[7rem] sm:top-0 sm:shadow-overlay md:-right-[8rem]']:
+            ['bg-darkBrownOverlay shadow-overlay sm:absolute sm:-right-[7rem] sm:top-0 sm:shadow-overlay md:-right-[8rem]']:
               variant === 'default',
             ['absolute right-8 top-8 shadow-overlay']:
               variant === 'full-screen-overlay',
