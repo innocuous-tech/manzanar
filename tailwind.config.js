@@ -25,14 +25,6 @@ module.exports = {
     },
     extend: {
       keyframes: {
-        // bobble: {
-        //   0: { transform: 'translateY(0px)' },
-        //   20: { transform: 'translateY(-10px)' },
-        //   40: { transform: 'translateY(0px)' },
-        //   60: { transform: 'translateY(10px)' },
-        //   80: { transform: 'translateY(0px)' },
-        //   100: { transform: 'translateY(0px)' },
-        // },
         toFullOpacity: {
           from: { opacity: 0 },
           to: { opacity: 1 },
