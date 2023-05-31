@@ -11,6 +11,10 @@ import { Q27 } from '@/app/(experience)/_components/Q27';
 import { Q28 } from '@/app/(experience)/_components/Q28';
 import { QCustom } from '@/app/(experience)/_components/QCustom';
 import { TranscriptDialogButton } from '@/app/(experience)/_components/TranscriptDialogButton';
+import {
+  Transcript,
+  TranscriptDialogContent,
+} from '@/app/(experience)/_components/TranscriptDialogContent';
 import { UserStatement } from '@/app/(experience)/_components/UserStatement';
 import { cms } from '@/cms';
 import { AutoExpandingTextArea } from '@/components/AutoExpandingTextArea';
@@ -43,9 +47,9 @@ export default function Page() {
   >('0.0');
 
   const [remainingQuestions, setRemainingQuestions] = useState([27, 28]);
-  const [transcript, setTranscript] = useState<
-    { origin: 'user' | 'ichiro'; message: string }[]
-  >([{ origin: 'ichiro', message: cms['0.0'] }]);
+  const [transcript, setTranscript] = useState<Transcript>([
+    { origin: 'ichiro', message: cms['0.0'] },
+  ]);
 
   const goToQ27 = () => {
     setTranscript((prev) => [...prev, { origin: 'user', message: cms.q27 }]);
@@ -157,7 +161,7 @@ export default function Page() {
       </AnimatePresence>
 
       <Dialog onOpenChange={setIsTranscriptVisible}>
-        <DialogContent>Transcript Here 😀</DialogContent>
+        <TranscriptDialogContent transcript={transcript} />
 
         <AnimatePresence>
           {!isTranscriptVisible && (

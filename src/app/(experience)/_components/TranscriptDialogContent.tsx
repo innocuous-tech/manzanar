@@ -1,30 +1,29 @@
 'use client';
 
-import { DialogClose } from '@radix-ui/react-dialog';
-import Link from 'next/link';
+import { IchiroStatement } from '@/app/(experience)/_components/IchiroStatement';
+import { UserStatement } from '@/app/(experience)/_components/UserStatement';
+import { DialogContent } from '@/components/Dialog';
 
-export const TranscriptDialogContent = () => (
-  <ul className="typography-button flex flex-col gap-10 p-6 text-center">
-    <DialogClose asChild>
-      <li>Resume</li>
-    </DialogClose>
+export type Transcript = { origin: 'user' | 'ichiro'; message: string }[];
 
-    <DialogClose asChild>
-      <Link href="/">
-        <li>Exit Game</li>
-      </Link>
-    </DialogClose>
+interface TranscriptDialogContentProps {
+  transcript: Transcript;
+}
 
-    <DialogClose asChild>
-      <Link href="/about">
-        <li>About</li>
-      </Link>
-    </DialogClose>
-
-    <DialogClose asChild>
-      <Link href="/team">
-        <li>The Team</li>
-      </Link>
-    </DialogClose>
-  </ul>
+export const TranscriptDialogContent = ({
+  transcript,
+}: TranscriptDialogContentProps) => (
+  <DialogContent>
+    <ol className="typography-button flex flex-col gap-6">
+      {transcript.map(({ origin, message }, index) => (
+        <li key={`${message}_${index}`}>
+          {origin === 'user' ? (
+            <UserStatement>{message}</UserStatement>
+          ) : (
+            <IchiroStatement>{message}</IchiroStatement>
+          )}
+        </li>
+      ))}
+    </ol>
+  </DialogContent>
 );
