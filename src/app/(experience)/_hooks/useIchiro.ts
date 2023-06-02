@@ -134,12 +134,20 @@ export function useIchiro({
               if (isFinal) {
                 setHasResponse(true);
 
+                const firstResponse = response[0];
+
                 const shouldPoint =
-                  response[0].includes('You') || response[0].includes(' you');
+                  !!firstResponse &&
+                  (firstResponse.includes('You') ||
+                    firstResponse.includes(' you'));
 
                 setIchiroVariant(getIchiroResponseVariant({ shouldPoint }));
 
-                setVisibleStatement({ source: 'ichiro', message: response[0] });
+                setVisibleStatement({
+                  source: 'ichiro',
+                  message: firstResponse,
+                });
+
                 setResponse((prev) => prev.slice(1)); // [1, 2, 3] --> [2, 3]
               }
             }
