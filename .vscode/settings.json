@@ -6,6 +6,6 @@
     "*.css": "tailwindcss"
   },
   "editor.wordWrap": "on",
-  "typescript.tsdk": "node_modules/.pnpm/typescript@5.0.4/node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }
