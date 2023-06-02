@@ -40,7 +40,7 @@ export function useIchiro({
   >;
   setVisibleStatement: Dispatch<
     SetStateAction<{
-      source: 'user' | 'ichiro';
+      origin: 'user' | 'ichiro';
       message: string;
     }>
   >;
@@ -54,6 +54,8 @@ export function useIchiro({
   useEffect(() => {
     if (!hasRenderedRef.current) {
       const askIchiro = async () => {
+        let firstResponse: string | null = null;
+
         const { InworldClient } = await import('@inworld/web-sdk');
 
         class InworldService {
@@ -117,12 +119,25 @@ export function useIchiro({
                   text = text.replace(userName, userName.toLocaleLowerCase());
                 }
 
-                setTranscript((prev) => [
-                  ...prev,
-                  { origin: 'ichiro', message: text },
-                ]);
+                const ichiroStatement = {
+                  origin: 'ichiro' as const,
+                  message: text,
+                };
 
-                setResponse((prev) => [...prev, text]);
+                if (!firstResponse) {
+                  firstResponse = text;
+                  const shouldPoint =
+                    text.includes('You') || text.includes(' you');
+
+                  setIchiroVariant(getIchiroResponseVariant({ shouldPoint }));
+                  setVisibleStatement(ichiroStatement);
+
+                  setResponse((prev) => prev.slice(1)); // [1, 2, 3] --> [2, 3]
+                } else {
+                  setResponse((prev) => [...prev, text]);
+                }
+
+                setTranscript((prev) => [...prev, ichiroStatement]);
               }
             }
 
@@ -133,22 +148,6 @@ export function useIchiro({
 
               if (isFinal) {
                 setHasResponse(true);
-
-                const firstResponse = response[0];
-
-                const shouldPoint =
-                  !!firstResponse &&
-                  (firstResponse.includes('You') ||
-                    firstResponse.includes(' you'));
-
-                setIchiroVariant(getIchiroResponseVariant({ shouldPoint }));
-
-                setVisibleStatement({
-                  source: 'ichiro',
-                  message: firstResponse,
-                });
-
-                setResponse((prev) => prev.slice(1)); // [1, 2, 3] --> [2, 3]
               }
             }
           },

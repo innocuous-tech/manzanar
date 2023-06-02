@@ -25,10 +25,10 @@ export const Q27 = ({
   onComplete,
 }: Q27Props) => {
   const [visibleStatement, setVisibleStatement] = useState<{
-    source: 'user' | 'ichiro';
+    origin: 'user' | 'ichiro';
     message: string;
   }>({
-    source: 'user',
+    origin: 'user',
     message: cms.q27,
   });
 
@@ -44,10 +44,10 @@ export const Q27 = ({
       <div />
 
       <section className="bottom-panel">
-        {visibleStatement.source === 'user' && (
+        {visibleStatement.origin === 'user' && (
           <UserStatement>{visibleStatement.message}</UserStatement>
         )}
-        {visibleStatement.source === 'ichiro' && (
+        {visibleStatement.origin === 'ichiro' && (
           <IchiroStatement>{visibleStatement.message}</IchiroStatement>
         )}
 
@@ -58,7 +58,7 @@ export const Q27 = ({
                 onComplete();
               } else {
                 setVisibleStatement({
-                  source: 'ichiro',
+                  origin: 'ichiro',
                   message: response[0],
                 });
 

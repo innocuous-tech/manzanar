@@ -26,10 +26,10 @@ export const QCustom = ({
   message,
 }: QCustomProps) => {
   const [visibleStatement, setVisibleStatement] = useState<{
-    source: 'user' | 'ichiro';
+    origin: 'user' | 'ichiro';
     message: string;
   }>({
-    source: 'user',
+    origin: 'user',
     message: message,
   });
 
@@ -45,10 +45,10 @@ export const QCustom = ({
       <div />
 
       <section className="bottom-panel">
-        {visibleStatement.source === 'user' && (
+        {visibleStatement.origin === 'user' && (
           <UserStatement>{visibleStatement.message}</UserStatement>
         )}
-        {visibleStatement.source === 'ichiro' && (
+        {visibleStatement.origin === 'ichiro' && (
           <IchiroStatement>{visibleStatement.message}</IchiroStatement>
         )}
 
@@ -59,7 +59,7 @@ export const QCustom = ({
                 onComplete();
               } else {
                 setVisibleStatement({
-                  source: 'ichiro',
+                  origin: 'ichiro',
                   message: response[0],
                 });
 
