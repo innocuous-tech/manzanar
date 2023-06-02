@@ -1,5 +1,4 @@
 'use client';
-
 import {
   ClipboardQuestion,
   ClipboardQuestionState,
@@ -23,6 +22,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/Dialog';
 import { IchiroAvatar, IchiroVariant } from '@/components/IchiroAvatar';
 import { IconButton } from '@/components/IconButton';
 import { Tooltip } from '@/components/Tooltip';
+import va from '@vercel/analytics';
 import clsx from 'clsx';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import Link from 'next/link';
@@ -57,6 +57,7 @@ export default function Page() {
   ]);
 
   const goToQ27 = () => {
+    va.track('Q27 Asked');
     setTranscript((prev) => [...prev, { origin: 'user', message: cms.q27 }]);
     incrementQuestionsAsked();
     setRemainingQuestions((prev) => prev.filter((q) => q !== 27));
@@ -65,6 +66,7 @@ export default function Page() {
   };
 
   const goToQ28 = () => {
+    va.track('Q28 Asked');
     setTranscript((prev) => [...prev, { origin: 'user', message: cms.q28 }]);
     incrementQuestionsAsked();
     setRemainingQuestions((prev) => prev.filter((q) => q !== 28));
@@ -73,6 +75,7 @@ export default function Page() {
   };
 
   const goToQCustom = (customMessage: string) => {
+    va.track('Custom Question Asked', { text: customQuestion });
     setTranscript((prev) => [
       ...prev,
       { origin: 'user', message: customMessage },
@@ -361,9 +364,9 @@ export default function Page() {
 
                             <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
                               <AutoExpandingTextArea
-                                onSubmit={({ aetextarea }) =>
-                                  goToQCustom(aetextarea)
-                                }
+                                onSubmit={({ aetextarea }) => {
+                                  goToQCustom(aetextarea);
+                                }}
                                 label="Custom Message For Ichiro To Respond To"
                                 placeholder="Type something to say to Ichiro"
                               />

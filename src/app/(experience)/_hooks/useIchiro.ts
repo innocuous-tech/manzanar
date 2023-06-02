@@ -9,6 +9,7 @@ import type {
   InworldConnectionService,
   InworldPacket,
 } from '@inworld/web-sdk';
+import va from '@vercel/analytics';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 interface InworldServiceProps {
@@ -78,7 +79,11 @@ export function useIchiro({
                   setRetryCount((prev) => prev + 1);
                   this.connection.sendText(messageToSend);
                 } else {
-                  console.error('Failed to connect to Inworld', { ...error });
+                  va.track('Inworld Error', {
+                    errorName: error.name,
+                    errorStack: error.stack ?? '',
+                    errorMessage: error.message,
+                  });
                 }
               })
               .setOnHistoryChange(props.onHistoryChange)

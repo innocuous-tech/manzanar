@@ -5,6 +5,8 @@ import './globals.css';
 
 const chivo = Chivo({ subsets: ['latin'] });
 
+import { Analytics } from '@vercel/analytics/react';
+
 export const metadata = {
   title: 'Manzanar',
   description:
@@ -20,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(chivo.className, 'bg-black', 'text-cream')}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
