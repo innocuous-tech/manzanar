@@ -2,11 +2,13 @@ import { ContinueButton } from '@/app/(experience)/_components/ContinueButton';
 import { IchiroStatement } from '@/app/(experience)/_components/IchiroStatement';
 import { UserStatement } from '@/app/(experience)/_components/UserStatement';
 import { useIchiro } from '@/app/(experience)/_hooks/useIchiro';
+import { SetIchiroVariant } from '@/components/IchiroAvatar';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 interface QCustomProps {
   message: string;
   onComplete: () => void;
+  setIchiroVariant: SetIchiroVariant;
   setTranscript: Dispatch<
     SetStateAction<
       {
@@ -18,6 +20,7 @@ interface QCustomProps {
 }
 
 export const QCustom = ({
+  setIchiroVariant,
   setTranscript,
   onComplete,
   message,
@@ -32,7 +35,9 @@ export const QCustom = ({
 
   const { hasResponse, response, setResponse } = useIchiro({
     messageToSend: message,
+    setIchiroVariant,
     setTranscript,
+    setVisibleStatement,
   });
 
   return (

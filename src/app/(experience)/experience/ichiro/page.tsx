@@ -20,7 +20,7 @@ import { cms } from '@/cms';
 import { AutoExpandingTextArea } from '@/components/AutoExpandingTextArea';
 import { Button } from '@/components/Button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/Dialog';
-import { IchiroAvatar } from '@/components/IchiroAvatar';
+import { IchiroAvatar, IchiroVariant } from '@/components/IchiroAvatar';
 import { IconButton } from '@/components/IconButton';
 import { Tooltip } from '@/components/Tooltip';
 import clsx from 'clsx';
@@ -30,6 +30,9 @@ import { ReactComponent as MenuIcon } from 'public/icons/menu.svg';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
+  const [isAnimatingClipboard, setIsAnimatingClipboard] =
+    useState<boolean>(false);
+  const [ichiroVariant, setIchiroVariant] = useState<IchiroVariant>('neutral');
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
   const [isTranscriptVisible, setIsTranscriptVisible] =
     useState<boolean>(false);
@@ -46,7 +49,9 @@ export default function Page() {
     '0.0' | '0.1' | 'q27' | 'q28' | 'custom' | 'process-prompt' | 'process'
   >('0.0');
 
-  const [remainingQuestions, setRemainingQuestions] = useState([27, 28]);
+  const [remainingQuestions, setRemainingQuestions] = useState<(27 | 28)[]>([
+    27, 28,
+  ]);
   const [transcript, setTranscript] = useState<Transcript>([
     { origin: 'ichiro', message: cms['0.0'] },
   ]);
@@ -56,6 +61,7 @@ export default function Page() {
     incrementQuestionsAsked();
     setRemainingQuestions((prev) => prev.filter((q) => q !== 27));
     setStep('q27');
+    setIchiroVariant('ear-grab');
   };
 
   const goToQ28 = () => {
@@ -63,6 +69,7 @@ export default function Page() {
     incrementQuestionsAsked();
     setRemainingQuestions((prev) => prev.filter((q) => q !== 28));
     setStep('q28');
+    setIchiroVariant('side-eye');
   };
 
   const goToQCustom = (customMessage: string) => {
@@ -73,17 +80,15 @@ export default function Page() {
     incrementQuestionsAsked();
     setCustomQuestion(customMessage);
     setStep('custom');
+    setIchiroVariant('neutral');
   };
 
-  const numberOfRemainingQuestions = remainingQuestions.length;
   const mostRecentTranscriptEntry = transcript.at(-1);
   const isClipboardFinished =
     clipboardState[27].N === true && clipboardState[28].N === true;
 
-  const shouldProcess =
-    isClipboardFinished &&
-    numberOfRemainingQuestions === 0 &&
-    questionsAsked >= 3;
+  const shouldForceProcess = questionsAsked > 3;
+  const shouldProcess = isClipboardFinished || shouldForceProcess;
 
   const promptProcessing = () => {
     setTranscript((prev) => [
@@ -96,10 +101,29 @@ export default function Page() {
   const animationControls = useAnimationControls();
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout | undefined;
+
+    if (shouldProcess && !isAnimatingClipboard) {
+      timeout = setTimeout(promptProcessing, 200);
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [isAnimatingClipboard, shouldProcess]);
+
+  useEffect(() => {
+    const animateClipBoard = async () => {
+      await animationControls.start({ opacity: 0 }, { duration: 0.4 });
+      await animationControls.start(
+        { opacity: 1 },
+        { duration: 0.4, delay: 1.5 },
+      );
+    };
+
     if ([clipboardState[27].Y, clipboardState[28].Y].includes(true)) {
-      animationControls.start({ opacity: 0 }, { duration: 0.4 }).then(() => {
-        animationControls.start({ opacity: 1 }, { duration: 0.4, delay: 1.5 });
-      });
+      setIsAnimatingClipboard(true);
+      animateClipBoard().then(() => setIsAnimatingClipboard(false));
     }
 
     const timeout = setTimeout(() => {
@@ -120,6 +144,9 @@ export default function Page() {
 
     return () => clearTimeout(timeout);
   }, [animationControls, clipboardState]);
+
+  const isQ27ButtonDisabled = !remainingQuestions.includes(27);
+  const isQ28ButtonDisabled = !remainingQuestions.includes(28);
 
   return (
     <div className="relative h-screen w-screen bg-[url('/images/bg1.png')] bg-cover text-lg sm:text-xl md:text-3xl">
@@ -183,7 +210,7 @@ export default function Page() {
                   >
                     {step === '0.0' && (
                       <>
-                        <aside className="panel block">{cms['start']}</aside>
+                        <aside className="panel block">{cms.start}</aside>
 
                         <motion.section
                           className="bottom-panel"
@@ -233,6 +260,10 @@ export default function Page() {
                                   label="Question 27:"
                                   fieldState={clipboardState[27]}
                                   setFieldState={(newState) => {
+                                    setRemainingQuestions((prev) =>
+                                      [...prev].filter((q) => q !== 27),
+                                    );
+
                                     if (
                                       newState.N === true &&
                                       remainingQuestions.includes(27)
@@ -266,6 +297,10 @@ export default function Page() {
                                   label="Question 28:"
                                   fieldState={clipboardState[28]}
                                   setFieldState={(newState) => {
+                                    setRemainingQuestions((prev) =>
+                                      [...prev].filter((q) => q !== 28),
+                                    );
+
                                     if (
                                       newState.N === true &&
                                       remainingQuestions.includes(28)
@@ -304,18 +339,22 @@ export default function Page() {
                               <Tooltip content={`Question 27: ${cms.q27}`}>
                                 <Button
                                   onClick={goToQ27}
-                                  disabled={!remainingQuestions.includes(27)}
+                                  disabled={isQ27ButtonDisabled}
                                 >
-                                  Ask question 27
+                                  {isQ27ButtonDisabled
+                                    ? 'Question 27 Answered'
+                                    : 'Ask Question 27'}
                                 </Button>
                               </Tooltip>
 
                               <Tooltip content={`Question 28: ${cms.q28}`}>
                                 <Button
                                   onClick={goToQ28}
-                                  disabled={!remainingQuestions.includes(28)}
+                                  disabled={isQ28ButtonDisabled}
                                 >
-                                  Ask question 28
+                                  {isQ28ButtonDisabled
+                                    ? 'Question 28 Answered'
+                                    : 'Ask Question 28'}
                                 </Button>
                               </Tooltip>
                             </div>
@@ -339,18 +378,22 @@ export default function Page() {
                     {step === 'q27' && (
                       <Q27
                         setTranscript={setTranscript}
-                        onComplete={() =>
-                          shouldProcess ? promptProcessing() : setStep('0.1')
-                        }
+                        setIchiroVariant={setIchiroVariant}
+                        onComplete={() => {
+                          setIchiroVariant('neutral');
+                          shouldProcess ? promptProcessing() : setStep('0.1');
+                        }}
                       />
                     )}
 
                     {step === 'q28' && (
                       <Q28
                         setTranscript={setTranscript}
-                        onComplete={() =>
-                          shouldProcess ? promptProcessing() : setStep('0.1')
-                        }
+                        setIchiroVariant={setIchiroVariant}
+                        onComplete={() => {
+                          setIchiroVariant('neutral');
+                          shouldProcess ? promptProcessing() : setStep('0.1');
+                        }}
                       />
                     )}
 
@@ -358,8 +401,10 @@ export default function Page() {
                       <QCustom
                         message={customQuestion}
                         setTranscript={setTranscript}
+                        setIchiroVariant={setIchiroVariant}
                         onComplete={() => {
                           setCustomQuestion('');
+                          setIchiroVariant('neutral');
 
                           return shouldProcess
                             ? promptProcessing()
@@ -431,7 +476,7 @@ export default function Page() {
                 </AnimatePresence>
               </div>
 
-              <IchiroAvatar variant="neutral" />
+              <IchiroAvatar variant={ichiroVariant} />
             </motion.div>
           )}
         </AnimatePresence>

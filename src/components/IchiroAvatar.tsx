@@ -4,10 +4,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-type UseIncrementingValueProps = {
+interface UseIncrementingValueProps {
   x: number;
   y: number;
-};
+}
 
 const useIncrementingValue = ({ x, y }: UseIncrementingValueProps): number => {
   const [value, setValue] = useState(x);
@@ -57,6 +57,28 @@ export type IchiroVariant =
   | 'pointing-at-user'
   | 'crossed-arms-unmoved';
 
+export type SetIchiroVariant = (variant: IchiroVariant) => void;
+
+export const getIchiroResponseVariant = ({
+  shouldPoint,
+}: {
+  shouldPoint: boolean;
+}) => {
+  if (shouldPoint) return 'pointing-at-user';
+
+  const relevantVariants: IchiroVariant[] = [
+    'crossed-arms-disbelief',
+    'fists-together-aversion',
+    'interlaced-fingers',
+    'crossed-arms-unmoved',
+  ];
+
+  const randomItemFromRelevantVariants =
+    relevantVariants[Math.floor(Math.random() * relevantVariants.length)];
+
+  return randomItemFromRelevantVariants;
+};
+
 export interface IchiroAvatarProps {
   variant: IchiroVariant;
 }
@@ -75,7 +97,7 @@ const variantDraftMap: {
 };
 
 export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
-  const draftNumber = variantDraftMap[variant] ?? 1;
+  const draftNumber = variantDraftMap[variant];
 
   return (
     <AnimatePresence>

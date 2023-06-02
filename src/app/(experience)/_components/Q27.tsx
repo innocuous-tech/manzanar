@@ -3,10 +3,12 @@ import { IchiroStatement } from '@/app/(experience)/_components/IchiroStatement'
 import { UserStatement } from '@/app/(experience)/_components/UserStatement';
 import { useIchiro } from '@/app/(experience)/_hooks/useIchiro';
 import { cms } from '@/cms';
+import { SetIchiroVariant } from '@/components/IchiroAvatar';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 interface Q27Props {
   onComplete: () => void;
+  setIchiroVariant: SetIchiroVariant;
   setTranscript: Dispatch<
     SetStateAction<
       {
@@ -17,7 +19,11 @@ interface Q27Props {
   >;
 }
 
-export const Q27 = ({ setTranscript, onComplete }: Q27Props) => {
+export const Q27 = ({
+  setIchiroVariant,
+  setTranscript,
+  onComplete,
+}: Q27Props) => {
   const [visibleStatement, setVisibleStatement] = useState<{
     source: 'user' | 'ichiro';
     message: string;
@@ -28,7 +34,9 @@ export const Q27 = ({ setTranscript, onComplete }: Q27Props) => {
 
   const { hasResponse, response, setResponse } = useIchiro({
     messageToSend: cms.q27,
+    setIchiroVariant,
     setTranscript,
+    setVisibleStatement,
   });
 
   return (

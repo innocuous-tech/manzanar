@@ -1,5 +1,9 @@
 'use client';
 
+import {
+  SetIchiroVariant,
+  getIchiroResponseVariant,
+} from '@/components/IchiroAvatar';
 import type {
   HistoryItem,
   InworldConnectionService,
@@ -19,9 +23,12 @@ const id = `${Math.random()}`;
 
 export function useIchiro({
   messageToSend,
+  setIchiroVariant,
   setTranscript,
+  setVisibleStatement,
 }: {
   messageToSend: string;
+  setIchiroVariant: SetIchiroVariant;
   setTranscript: Dispatch<
     SetStateAction<
       {
@@ -30,9 +37,16 @@ export function useIchiro({
       }[]
     >
   >;
+  setVisibleStatement: Dispatch<
+    SetStateAction<{
+      source: 'user' | 'ichiro';
+      message: string;
+    }>
+  >;
 }) {
   const hasRenderedRef = useRef(false);
 
+  const [retryCount, setRetryCount] = useState<number>(0);
   const [response, setResponse] = useState<string[]>([]);
   const [hasResponse, setHasResponse] = useState<boolean>(false);
 
@@ -58,12 +72,19 @@ export function useIchiro({
               })
               .setUser({ fullName: userName, id })
               .setScene(process.env.NEXT_PUBLIC_INWORLD_SCENE!)
-              .setGenerateSessionToken(this.generateSessionToken)
-              .setOnError((err) => console.log(err))
+              .setGenerateSessionToken(this.generateSessionToken) // eslint-disable-line @typescript-eslint/unbound-method
+              .setOnError((error) => {
+                if (retryCount < 3) {
+                  setRetryCount((prev) => prev + 1);
+                  this.connection.sendText(messageToSend);
+                } else {
+                  console.error('Failed to connect to Inworld', { ...error });
+                }
+              })
               .setOnHistoryChange(props.onHistoryChange)
               .setOnMessage((packet) => {
                 props.onMessage(packet);
-                if (packet.isInteractionEnd()) this.connection?.close();
+                if (packet.isInteractionEnd()) this.connection.close();
               })
               .setOnReady(props.onReady)
               .setOnDisconnect(props.onDisconnect);
@@ -80,38 +101,61 @@ export function useIchiro({
 
         const service = new InworldService({
           onMessage: (message) => {
-            let text = message?.text?.text;
+            if ('text' in message) {
+              let text = message.text.text;
 
-            if (text) {
-              const hasMidSentenceUserName =
-                !text.startsWith(userName) && text.includes(userName);
+              if (text) {
+                const hasMidSentenceUserName =
+                  !text.startsWith(userName) && text.includes(userName);
 
-              if (hasMidSentenceUserName) {
-                text = text.replace(userName, userName.toLocaleLowerCase());
+                if (hasMidSentenceUserName) {
+                  text = text.replace(userName, userName.toLocaleLowerCase());
+                }
+
+                setTranscript((prev) => [
+                  ...prev,
+                  { origin: 'ichiro', message: text },
+                ]);
+
+                setResponse((prev) => [...prev, text]);
               }
-
-              setTranscript((prev) => [
-                ...prev,
-                { origin: 'ichiro', message: text },
-              ]);
-
-              setResponse((prev) => [...prev, text]);
             }
 
-            const isFinal = message?.control?.type === 'INTERACTION_END';
-            if (isFinal) setHasResponse(true);
+            if ('control' in message) {
+              // Weird import path. Don't want to resolve this lint error and blow up bundle.
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+              const isFinal = message.control.type === 'INTERACTION_END';
+
+              if (isFinal) {
+                setHasResponse(true);
+
+                const shouldPoint =
+                  response[0].includes('You') || response[0].includes(' you');
+
+                setIchiroVariant(getIchiroResponseVariant({ shouldPoint }));
+
+                setVisibleStatement({ source: 'ichiro', message: response[0] });
+                setResponse((prev) => prev.slice(1)); // [1, 2, 3] --> [2, 3]
+              }
+            }
           },
         });
 
-        await service.connection?.isActive();
-        await service.connection?.sendText(messageToSend);
+        await service.connection.sendText(messageToSend);
       };
 
       askIchiro();
     }
 
     hasRenderedRef.current = true;
-  }, [messageToSend, setTranscript]);
+  }, [
+    messageToSend,
+    response,
+    retryCount,
+    setIchiroVariant,
+    setTranscript,
+    setVisibleStatement,
+  ]);
 
   return { response, setResponse, hasResponse };
 }
