@@ -1,16 +1,15 @@
 import { Button } from '@/components/Button';
 import { Tooltip } from '@/components/Tooltip';
 import clsx from 'clsx';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-export const IconButton = ({
-  className,
-  label,
-  hasTooltip = true,
-  variant = 'transparent',
-  ...props
-}: Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'aria-label'> & {
+interface IconButtonProps
+  extends Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    'children' | 'aria-label'
+  > {
   children: JSX.Element;
+
   label: string;
 
   /** @default true */
@@ -18,29 +17,42 @@ export const IconButton = ({
 
   /** @default 'transparent' */
   variant?: 'transparent' | 'solid';
-}) => {
-  const isTransparent = variant === 'transparent';
-  const button = (
-    <Button
-      className={clsx(
-        className,
-        {
-          ['border-none bg-darkBrownOverlay shadow-overlay disabled:border-none']:
-            !isTransparent,
-        },
-        'sm:[&>svg]:h-10',
-        'sm:[&>svg]:w-10',
-        '[&>svg]:h-8',
-        '[&>svg]:w-8',
-        '!sm:p-6',
-        '!p-4',
-      )}
-      aria-label={label}
-      {...props}
-    />
-  );
+}
 
-  if (!hasTooltip) return button;
+export const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
+  (
+    { className, label, hasTooltip = true, variant = 'transparent', ...props },
+    ref,
+  ) => {
+    const isTransparent = variant === 'transparent';
+    const button = (
+      <Button
+        className={clsx(
+          className,
+          {
+            ['border-none bg-darkBrownOverlay shadow-overlay disabled:border-none']:
+              !isTransparent,
+          },
+          'sm:[&>svg]:h-10',
+          'sm:[&>svg]:w-10',
+          '[&>svg]:h-8',
+          '[&>svg]:w-8',
+          '!sm:p-6',
+          '!p-4',
+        )}
+        aria-label={label}
+        {...props}
+      />
+    );
 
-  return <Tooltip content={label}>{button}</Tooltip>;
-};
+    if (!hasTooltip) return <span ref={ref}>{button}</span>;
+
+    return (
+      <span ref={ref}>
+        <Tooltip content={label}>{button}</Tooltip>
+      </span>
+    );
+  },
+);
+
+IconButton.displayName = 'IconButton';
