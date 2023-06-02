@@ -18,5 +18,6 @@ export const InvibleAssets = () => (
     <img src="/images/ichiro/draft6.png" alt="" className="hidden" />
     <img src="/images/ichiro/draft7.png" alt="" className="hidden" />
     <img src="/images/ichiro/draft8.png" alt="" className="hidden" />
+    <img src="/images/clipboard.webp" alt="" className="hidden" />
   </>
 );
