@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form';
 
 const IDENTIFIER = 'aetextarea';
 
-type FormData = {
+interface FormData {
   [IDENTIFIER]: string;
-};
+}
 
 interface AutoExpandingTextAreaProps
   extends Omit<
@@ -57,7 +57,7 @@ export const AutoExpandingTextArea = ({
           name={IDENTIFIER}
           className="auto-expanding-textarea custom-scrollbar"
           onKeyDown={(event) => {
-            const isHoldingShift = event.shiftKey === true;
+            const isHoldingShift = event.shiftKey;
             const isHittingEnter = event.key === 'Enter';
 
             if (isHittingEnter) {

@@ -2,8 +2,10 @@ import clsx from 'clsx';
 import { ReactComponent as DownwardTriangleIcon } from 'public/icons/downward-triangle.svg';
 import { ButtonHTMLAttributes } from 'react';
 
-interface ContinueButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {}
+type ContinueButtonProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'type'
+>;
 
 export const ContinueButton = ({
   children,
@@ -18,6 +20,7 @@ export const ContinueButton = ({
         className,
         'group typography-tooltip absolute bottom-6 right-6 inline-flex items-end gap-4',
       )}
+      type="button"
       {...props}
     >
       <span className="group-hover:underline group-focus-visible:underline">

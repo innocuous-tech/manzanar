@@ -2,7 +2,7 @@ import { LinkWithActiveRouteStyles } from '@/components/LinkWithActiveRouteStyle
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 
-export default function MarketingLayout({ children }: PropsWithChildren<{}>) {
+export default function MarketingLayout({ children }: PropsWithChildren) {
   return (
     <div className="text-cream">
       <nav className="absolute left-0 right-0 top-0 flex items-center justify-between gap-4 px-8 py-8 text-lg sm:gap-6 sm:px-[6rem] sm:py-14 sm:text-xl md:text-3xl">

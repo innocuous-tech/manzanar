@@ -17,6 +17,9 @@ import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 import { theme } from '../../../../tailwind.config';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
 const DSSection = ({
   title,
   children,
@@ -154,7 +157,7 @@ export default function Page() {
 
       <DSSection title="Form Inputs">
         <AutoExpandingTextArea
-          onSubmit={() => {}}
+          onSubmit={noop}
           label="Type here"
           placeholder="Type something to say to Ichiro"
         />

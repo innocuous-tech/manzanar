@@ -20,5 +20,7 @@ module.exports = {
   root: true,
   rules: {
     '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/unbound-method': 'off',
   },
 };

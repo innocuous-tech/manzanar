@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-export const IchiroStatement = ({ children }: PropsWithChildren<{}>) => {
+export const IchiroStatement = ({ children }: PropsWithChildren) => {
   return (
     <>
       <span className="typography-name text-ichiro">Ichiro:</span>
