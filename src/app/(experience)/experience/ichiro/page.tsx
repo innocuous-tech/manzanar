@@ -364,10 +364,10 @@ export default function Page() {
 
                             <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
                               <AutoExpandingTextArea
+                                label="Custom message for Ichiro. Please note that hitting ENTER will submit the form."
                                 onSubmit={({ aetextarea }) => {
                                   goToQCustom(aetextarea);
                                 }}
-                                label="Custom Message For Ichiro To Respond To"
                                 placeholder="Type something to say to Ichiro"
                               />
 

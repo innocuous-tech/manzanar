@@ -59,13 +59,11 @@ export const AutoExpandingTextArea = ({
           onKeyDown={(event) => {
             const isHoldingShift = event.shiftKey;
             const isHittingEnter = event.key === 'Enter';
+            const hasValue = !!value.trim();
 
-            if (isHittingEnter) {
-              if (!isHoldingShift) {
-                event.preventDefault();
-              } else {
-                if (value) handleSubmit(onSubmit);
-              }
+            if (hasValue && isHittingEnter && !isHoldingShift) {
+              event.preventDefault();
+              return handleSubmit(onSubmit)(event);
             }
           }}
           placeholder={placeholder}
