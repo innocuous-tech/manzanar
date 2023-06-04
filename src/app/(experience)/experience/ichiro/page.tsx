@@ -62,7 +62,6 @@ export default function Page() {
     incrementQuestionsAsked();
     setRemainingQuestions((prev) => prev.filter((q) => q !== 27));
     setStep('q27');
-    setIchiroVariant('ear-grab');
   };
 
   const goToQ28 = () => {
@@ -71,7 +70,6 @@ export default function Page() {
     incrementQuestionsAsked();
     setRemainingQuestions((prev) => prev.filter((q) => q !== 28));
     setStep('q28');
-    setIchiroVariant('side-eye');
   };
 
   const goToQCustom = (customMessage: string) => {
@@ -83,7 +81,6 @@ export default function Page() {
     incrementQuestionsAsked();
     setCustomQuestion(customMessage);
     setStep('custom');
-    setIchiroVariant('neutral');
   };
 
   const mostRecentTranscriptEntry = transcript.at(-1);

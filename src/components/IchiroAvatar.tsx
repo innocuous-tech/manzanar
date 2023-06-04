@@ -71,6 +71,8 @@ export const getIchiroResponseVariant = ({
     'fists-together-aversion',
     'interlaced-fingers',
     'crossed-arms-unmoved',
+    'side-eye',
+    'ear-grab',
   ];
 
   const randomItemFromRelevantVariants =
