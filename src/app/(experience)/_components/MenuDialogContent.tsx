@@ -11,7 +11,7 @@ export const MenuDialogContent = () => (
 
     <DialogClose asChild>
       <Link href="/">
-        <li>Exit Game</li>
+        <li>Exit Experience</li>
       </Link>
     </DialogClose>
 

@@ -13,7 +13,7 @@ export const DummyFullScreenOverlayDialogContent = () => (
 
     <DialogClose asChild>
       <Link href="/playground">
-        <li>Exit Game</li>
+        <li>Exit Experience</li>
       </Link>
     </DialogClose>
 
