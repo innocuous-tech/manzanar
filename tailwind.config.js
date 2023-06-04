@@ -14,7 +14,8 @@ module.exports = {
     },
     colors: {
       cream: '#DEDBCD',
-      creamSemi: '#DEDBCD50',
+      creamSemi50: 'rgba(222, 219, 205, 0.5)',
+      creamSemi35: 'rgba(222, 219, 205, 0.35)',
       player: '#C3AF9F',
       ichiro: '#FD984B',
       darkBrownText: '#462f1d',
@@ -94,6 +95,18 @@ module.exports = {
           lineHeight: '1.15',
           fontFamily: `'Courier New', Courier, monospace`,
           letterSpacing: '-5%',
+        },
+        '.button': {
+          '@apply typography-button border-2 border-solid cursor-pointer outline-none px-6 py-2 sm:px-8 sm:py-3 rounded-xl text-xl sm:text-3xl':
+            {},
+        },
+        '.button-variant-outlined': {
+          '@apply border-cream text-cream hover:bg-creamSemi50 focus-visible:text-darkBrownText focus-visible:bg-cream active:text-darkBrownText active:bg-cream disabled:cursor-not-allowed disabled:bg-[transparent] disabled:text-creamSemi50 disabled:border-creamSemi50 disabled:line-through':
+            {},
+        },
+        '.button-variant-filled': {
+          '@apply bg-cream border-cream text-darkBrownText hover:bg-creamSemi50 hover:border-creamSemi50 focus-visible:border-ichiro   active:bg-creamSemi35 disabled:cursor-not-allowed disabled:bg-creamSemi35 disabled:text-darkBrownOverlay disabled:line-through':
+            {},
         },
       });
     }),

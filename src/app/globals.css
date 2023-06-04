@@ -6,7 +6,7 @@
   /* Firefox */
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: theme('colors.cream') theme('colors.creamSemi');
+    scrollbar-color: theme('colors.cream') theme('colors.creamSemi50');
   }
 
   /* Chrome, Edge, and Safari */
@@ -16,7 +16,7 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: theme('colors.creamSemi');
+    background: theme('colors.creamSemi50');
     border-radius: theme('borderRadius.full');
   }
 

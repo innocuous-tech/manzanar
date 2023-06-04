@@ -66,7 +66,7 @@ export default function Page() {
        * PostCSS strips them. We have used all of them (invisibly) so that they are not
        * considered unused classes.
        */}
-      <div className="typography-title typography-body typography-button typography-tooltip typography-name typography-clipboard invisible bg-black bg-cream bg-creamSemi bg-darkBrownOverlay bg-darkBrownText bg-ichiro bg-menuOverlay bg-player text-black text-cream text-creamSemi text-darkBrownOverlay text-darkBrownText text-ichiro text-menuOverlay text-player" />
+      <div className="bg-creamSemi50 text-creamSemi50 typography-title typography-body typography-button typography-tooltip typography-name typography-clipboard invisible bg-black bg-cream bg-darkBrownOverlay bg-darkBrownText bg-ichiro bg-menuOverlay bg-player text-black text-cream text-darkBrownOverlay text-darkBrownText text-ichiro text-menuOverlay text-player" />
 
       <h1 className="text-center text-5xl font-bold">Design System</h1>
 

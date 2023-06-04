@@ -16,7 +16,7 @@ export default function Page() {
           transition={{ duration: 1 }}
         >
           <Link href="/">
-            <Button>Back Home</Button>
+            <Button className="button-variant-filled">Back Home</Button>
           </Link>
         </motion.div>
       </AnimatePresence>

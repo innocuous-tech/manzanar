@@ -44,13 +44,13 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
           transition={{ duration: 1 }}
         >
           <Link href="/">
-            <IconButton label="Go Back">
+            <IconButton label="Go Back" className="button-variant-filled">
               <ChevronLeft />
             </IconButton>
           </Link>
 
           <Link href={nextPath}>
-            <Button>Skip</Button>
+            <Button className="button-variant-filled">Skip</Button>
           </Link>
         </motion.div>
       </AnimatePresence>
