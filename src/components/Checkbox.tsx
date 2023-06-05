@@ -26,12 +26,12 @@ export const Checkbox = ({
       {label}
 
       <RadixCheckbox.Root
-        className="inline-block h-7 w-7 rounded-sm border-[1px] border-solid border-black bg-[transparent]"
+        className="inline-block h-7 w-7 rounded-sm border-[1px] border-solid border-black bg-[transparent] disabled:hover:cursor-not-allowed"
         checked={checkState}
         onCheckedChange={setCheckState}
         disabled={isDisabled}
       >
-        <RadixCheckbox.Indicator className="[&>*]:scale-[1.3]">
+        <RadixCheckbox.Indicator className="disabled:hover:cursor-not-allowed [&>*]:scale-[1.3]">
           {isChecked && <Checkmark className="origin-bottom-left" />}
           {isIndeterminate && <Scribble />}
         </RadixCheckbox.Indicator>

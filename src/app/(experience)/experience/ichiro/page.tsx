@@ -33,29 +33,37 @@ import { useCallback, useEffect, useState } from 'react';
 export default function Page() {
   const [ichiroVariant, setIchiroVariant] = useState<IchiroVariant>('neutral');
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
+
   const [isTranscriptVisible, setIsTranscriptVisible] =
     useState<boolean>(false);
+
   const [clipboardState, setClipboardState] = useState<{
     27: ClipboardQuestionState;
     28: ClipboardQuestionState;
   }>({ 27: { Y: false, N: false }, 28: { Y: false, N: false } });
 
+  const [transcript, setTranscript] = useState<Transcript>([
+    { origin: 'ichiro', message: cms['0.0'] },
+  ]);
+
   const [customQuestion, setCustomQuestion] = useState<string>('');
-  const [frustrationCounter, setFrustrationCounter] = useState<number>(0);
-  const isFrustrated = frustrationCounter > 3;
-  const resetFrustrationCounter = () => setFrustrationCounter(0);
+  const [customQuestionBudget, setCustomQuestionBudget] = useState<number>(
+    cms.customQuestionBudget,
+  );
+  const resetChatBudget = () =>
+    setCustomQuestionBudget(cms.customQuestionBudget);
+  const lowerChatBudget = () => setCustomQuestionBudget((x) => x - 1);
+  const hasChatBudget = customQuestionBudget > 0;
 
   const [step, setStep] = useState<
     | '0.0'
     | '0.1'
+    | 'clipboard-27'
+    | 'clipboard-28'
     | 'q27'
     | 'q28'
     | 'custom'
-    | '2.0'
-    | '2.1'
-    | '2.2'
     | '2.3'
-    | 'forced-prompt-process'
     | 'prompt-process'
     | 'process'
   >('0.0');
@@ -69,23 +77,19 @@ export default function Page() {
   const markQ28Asked = () =>
     setRemainingQuestions((prev) => prev.filter((q) => q !== 28));
 
-  const [transcript, setTranscript] = useState<Transcript>([
-    { origin: 'ichiro', message: cms['0.0'] },
-  ]);
-
   const goToQ27 = () => {
     va.track('Q27 Asked');
-    resetFrustrationCounter();
     setTranscript((prev) => [...prev, { origin: 'user', message: cms.q27 }]);
     markQ27Asked();
+    resetChatBudget();
     setStep('q27');
   };
 
   const goToQ28 = () => {
     va.track('Q28 Asked');
-    resetFrustrationCounter();
     setTranscript((prev) => [...prev, { origin: 'user', message: cms.q28 }]);
     markQ28Asked();
+    resetChatBudget();
     setStep('q28');
   };
 
@@ -95,51 +99,9 @@ export default function Page() {
       ...prev,
       { origin: 'user', message: customMessage },
     ]);
-    setFrustrationCounter((x) => x + 1);
     setCustomQuestion(customMessage);
+    lowerChatBudget();
     setStep('custom');
-  };
-
-  const forceAction = (actionId: '2.0' | '2.1' | '2.2' | '2.3') => {
-    resetFrustrationCounter();
-    setTranscript((prev) => [
-      ...prev,
-      { origin: 'ichiro', message: cms[actionId] },
-    ]);
-    setStep(actionId);
-
-    if (actionId === '2.0') setRemainingQuestions([]);
-    if (actionId === '2.1') markQ27Asked();
-    if (actionId === '2.2') markQ28Asked();
-
-    setTimeout(() => {
-      if (actionId !== '2.3') {
-        animateClipBoard();
-
-        if (actionId === '2.0') {
-          setRemainingQuestions([]);
-          setClipboardState((prev) => ({
-            ...prev,
-            27: { ...prev[27], N: true },
-            28: { ...prev[28], N: true },
-          }));
-        }
-
-        if (actionId === '2.1') {
-          setClipboardState((prev) => ({
-            ...prev,
-            27: { ...prev[27], N: true },
-          }));
-        }
-
-        if (actionId === '2.2') {
-          setClipboardState((prev) => ({
-            ...prev,
-            28: { ...prev[28], N: true },
-          }));
-        }
-      }
-    }, 500); // 100 milliseconds + 400 millisecond delay from typical step transition.
   };
 
   const promptForcedProcessing = () => {
@@ -147,7 +109,7 @@ export default function Page() {
       ...prev,
       { origin: 'ichiro', message: cms['1.0'] },
     ]);
-    setStep('forced-prompt-process');
+    setStep('prompt-process');
   };
 
   const processIchiro = () => {
@@ -155,7 +117,7 @@ export default function Page() {
       ...prev,
       {
         origin: 'user',
-        message: cms.process_ichiro,
+        message: cms.processIchiro,
       },
       { origin: 'ichiro', message: cms['0.3'] },
     ]);
@@ -163,11 +125,8 @@ export default function Page() {
   };
 
   const mostRecentTranscriptEntry = transcript.at(-1);
-  const isClipboardFinished =
-    clipboardState[27].N === true && clipboardState[28].N === true;
 
   const animationControls = useAnimationControls();
-
   const animateClipBoard = useCallback(async () => {
     await animationControls.start({ opacity: 0 }, { duration: 0.4 });
     await animationControls.start(
@@ -188,6 +147,8 @@ export default function Page() {
           ...prev,
           27: { Y: 'indeterminate', N: true },
         }));
+
+        setStep('0.1');
       }
 
       if (clipboardState[28].Y === true) {
@@ -195,6 +156,8 @@ export default function Page() {
           ...prev,
           28: { Y: 'indeterminate', N: true },
         }));
+
+        setStep('0.1');
       }
     }, 1000);
 
@@ -208,12 +171,10 @@ export default function Page() {
     questionNumber: 27 | 28,
     nextState: ClipboardQuestionState,
   ) => {
-    if (questionNumber === 27) markQ27Asked();
-    if (questionNumber === 28) markQ28Asked();
+    if (!isQ27Asked && questionNumber === 27) markQ27Asked();
+    if (!isQ28Asked && questionNumber === 28) markQ28Asked();
 
     if (nextState.N === true && remainingQuestions.includes(questionNumber)) {
-      resetFrustrationCounter();
-
       setTranscript((prev) => [
         ...prev,
         {
@@ -238,6 +199,8 @@ export default function Page() {
       [questionNumber]: nextState,
     }));
   };
+
+  console.log({ customQuestionBudget });
 
   return (
     <div className="relative h-screen w-screen bg-[url('/images/bg1.png')] bg-cover text-lg sm:text-xl md:text-3xl">
@@ -317,7 +280,10 @@ export default function Page() {
                       </>
                     )}
 
-                    {['0.1', '2.0', '2.1', '2.2', '2.3'].includes(step) && (
+                    {(step === '0.1' ||
+                      step === 'clipboard-27' ||
+                      step === 'clipboard-28' ||
+                      step === '2.3') && (
                       <>
                         {mostRecentTranscriptEntry && (
                           <aside className="panel block">
@@ -353,6 +319,7 @@ export default function Page() {
                                   setFieldState={(nextState) => {
                                     onUserClipboardChange(27, nextState);
                                   }}
+                                  isInitialDisabled={step === 'clipboard-28'}
                                 />
                                 <ClipboardQuestion
                                   label="Question 28:"
@@ -360,41 +327,58 @@ export default function Page() {
                                   setFieldState={(nextState) => {
                                     onUserClipboardChange(28, nextState);
                                   }}
+                                  isInitialDisabled={step === 'clipboard-27'}
                                 />
                               </div>
                             </div>
                           </motion.aside>
 
-                          <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 sm:h-80 sm:gap-8 sm:px-16 sm:py-12">
-                            <div className="flex w-full flex-col gap-4 sm:w-[unset] sm:flex-row sm:gap-16">
-                              <Tooltip content={`Question 27: ${cms.q27}`}>
-                                <Button onClick={goToQ27} disabled={isQ27Asked}>
-                                  {isQ27Asked
-                                    ? 'Question 27 Answered'
-                                    : 'Ask Question 27'}
-                                </Button>
-                              </Tooltip>
+                          <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 sm:gap-8 sm:px-16 sm:py-12">
+                            {step.startsWith('clipboard') ? (
+                              <p className="flex w-full items-center justify-center">
+                                {cms.clipboard}
+                              </p>
+                            ) : (
+                              <>
+                                <div className="flex w-full flex-col gap-4 sm:w-[unset] sm:flex-row sm:gap-16">
+                                  <Tooltip content={`Question 27: ${cms.q27}`}>
+                                    <Button
+                                      onClick={goToQ27}
+                                      disabled={isQ27Asked}
+                                    >
+                                      {isQ27Asked
+                                        ? 'Question 27 Answered'
+                                        : 'Ask Question 27'}
+                                    </Button>
+                                  </Tooltip>
 
-                              <Tooltip content={`Question 28: ${cms.q28}`}>
-                                <Button onClick={goToQ28} disabled={isQ28Asked}>
-                                  {isQ28Asked
-                                    ? 'Question 28 Answered'
-                                    : 'Ask Question 28'}
-                                </Button>
-                              </Tooltip>
-                            </div>
+                                  <Tooltip content={`Question 28: ${cms.q28}`}>
+                                    <Button
+                                      onClick={goToQ28}
+                                      disabled={isQ28Asked}
+                                    >
+                                      {isQ28Asked
+                                        ? 'Question 28 Answered'
+                                        : 'Ask Question 28'}
+                                    </Button>
+                                  </Tooltip>
+                                </div>
 
-                            <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
-                              <AutoExpandingTextArea
-                                label="Custom message for Ichiro. Please note that hitting ENTER will submit the form."
-                                onSubmit={({ aetextarea }) => {
-                                  goToQCustom(aetextarea);
-                                }}
-                                placeholder="Type something to say to Ichiro"
-                              />
+                                {hasChatBudget && (
+                                  <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
+                                    <AutoExpandingTextArea
+                                      label="Custom message for Ichiro. Please note that hitting ENTER will submit the form."
+                                      onSubmit={({ aetextarea }) => {
+                                        goToQCustom(aetextarea);
+                                      }}
+                                      placeholder="Type something to say to Ichiro"
+                                    />
 
-                              <TranscriptDialogButton />
-                            </div>
+                                    <TranscriptDialogButton />
+                                  </div>
+                                )}
+                              </>
+                            )}
                           </section>
                         </div>
                       </>
@@ -406,7 +390,7 @@ export default function Page() {
                         setIchiroVariant={setIchiroVariant}
                         onComplete={() => {
                           setIchiroVariant('neutral');
-                          setStep('0.1');
+                          setStep('clipboard-27');
                         }}
                       />
                     )}
@@ -417,7 +401,7 @@ export default function Page() {
                         setIchiroVariant={setIchiroVariant}
                         onComplete={() => {
                           setIchiroVariant('neutral');
-                          setStep('0.1');
+                          setStep('clipboard-28');
                         }}
                       />
                     )}
@@ -431,29 +415,38 @@ export default function Page() {
                           setCustomQuestion('');
                           setIchiroVariant('neutral');
 
-                          if (isClipboardFinished) {
-                            return isFrustrated
-                              ? promptForcedProcessing()
-                              : setStep('prompt-process');
+                          if (hasChatBudget) {
+                            return setStep('0.1');
                           }
 
-                          // Clipboard unfinished
-                          if (!isFrustrated) return setStep('0.1');
+                          /*** ************************ ***/
+                          /*** Out of chat budget ***/
 
-                          const isBothAsked = isQ27Asked && isQ28Asked;
-                          const isNeitherAsked = !isQ27Asked && !isQ28Asked;
+                          // No questions asked
+                          if (!isQ27Asked && !isQ28Asked) {
+                            setTranscript((prev) => [
+                              ...prev,
+                              { origin: 'ichiro', message: cms['2.3'] },
+                            ]);
+                            setStep('2.3');
+                            return;
+                          }
 
-                          if (isBothAsked) return forceAction('2.0');
-                          if (isNeitherAsked) return forceAction('2.3');
-                          if (!isQ27Asked) return forceAction('2.1');
-                          if (!isQ28Asked) return forceAction('2.2');
+                          // Some question asked
+                          if (!isQ27Asked || !isQ28Asked) {
+                            setStep('0.1'); // budget is 0 so we just show the question buttons
+                            return;
+                          }
+
+                          // All questions asked
+                          return promptForcedProcessing();
+
+                          /*** ************************ ***/
                         }}
                       />
                     )}
 
-                    {['prompt-process', 'forced-prompt-process'].includes(
-                      step,
-                    ) && (
+                    {step === 'prompt-process' && (
                       <>
                         {mostRecentTranscriptEntry && (
                           <aside className="panel block">
@@ -469,13 +462,15 @@ export default function Page() {
                           </aside>
                         )}
 
-                        {step === 'prompt-process' && (
-                          <div className="fixed inset-0 top-[unset]">
-                            <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 sm:h-80 sm:gap-8 sm:px-16 sm:py-12">
-                              <div className="flex w-full items-center justify-center sm:w-[unset]">
-                                <ProcessIchiroButton onClick={processIchiro} />
-                              </div>
+                        <div className="fixed inset-0 top-[unset]">
+                          <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 sm:gap-8 sm:px-16 sm:py-12">
+                            <div className="flex w-full items-center justify-center gap-9 sm:w-[unset]">
+                              <ProcessIchiroButton onClick={processIchiro} />
 
+                              {!hasChatBudget && <TranscriptDialogButton />}
+                            </div>
+
+                            {hasChatBudget && (
                               <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
                                 <AutoExpandingTextArea
                                   label="Custom message for Ichiro. Please note that hitting ENTER will submit the form."
@@ -487,24 +482,16 @@ export default function Page() {
 
                                 <TranscriptDialogButton />
                               </div>
-                            </section>
-                          </div>
-                        )}
-
-                        {step === 'forced-prompt-process' && (
-                          <div className="fixed inset-0 top-[unset]">
-                            <section className="relative z-10 flex flex-col items-center justify-center bg-darkBrownOverlay p-4 sm:h-48 sm:gap-8 sm:px-16 sm:py-12">
-                              <ProcessIchiroButton onClick={processIchiro} />
-                            </section>
-                          </div>
-                        )}
+                            )}
+                          </section>
+                        </div>
                       </>
                     )}
 
                     {step === 'process' && (
                       <>
                         <aside className="panel block">
-                          <UserStatement>{cms.process_ichiro}</UserStatement>
+                          <UserStatement>{cms.processIchiro}</UserStatement>
                         </aside>
 
                         <motion.section

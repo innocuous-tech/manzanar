@@ -8,8 +8,8 @@ interface ProcessIchiroButtonProps {
 
 export const ProcessIchiroButton = ({ onClick }: ProcessIchiroButtonProps) => {
   return (
-    <Tooltip content={cms.process_ichiro}>
-      <Button onClick={onClick}>{cms.process_ichiro_button}</Button>
+    <Tooltip content={cms.processIchiro}>
+      <Button onClick={onClick}>{cms.processIchiroButton}</Button>
     </Tooltip>
   );
 };
