@@ -19,6 +19,7 @@ export const cms = {
   '0.2': `Look, I don’t want to waste time. I won’t risk my life for a country who took away my freedoms, and I will not forswear allegiance to an emperor I don’t even know. My answer is No and No. You know what you need to do.`,
   '0.3': `Thank you for your service, I guess. You are just doing your job right? Yeah, just like I was just being American my entire life. Have a good day.`,
   process_ichiro: `Ichiro, I hereby declare you as a potential enemy of the state, and will be ordering you be sent to Tule Lake.`,
+  process_ichiro_button: 'Process Ichiro',
   q27: `Are you willing to serve on combat duty whenever ordered? Yes or no?`,
   q28: `Would you swear unqualified allegiance to the United States and forswear any form of allegiance to the Emperor of Japan? Yes or no?`,
 };
