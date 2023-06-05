@@ -362,6 +362,8 @@ export default function Page() {
                                         : 'Ask Question 28'}
                                     </Button>
                                   </Tooltip>
+
+                                  {!hasChatBudget && <TranscriptDialogButton />}
                                 </div>
 
                                 {hasChatBudget && (
