@@ -105,7 +105,7 @@ module.exports = {
             {},
         },
         '.button-variant-filled': {
-          '@apply bg-cream border-cream text-darkBrownText hover:bg-creamSemi50 hover:border-creamSemi50 focus-visible:border-ichiro   active:bg-creamSemi35 disabled:cursor-not-allowed disabled:bg-creamSemi35 disabled:text-darkBrownOverlay disabled:line-through':
+          '@apply bg-cream border-cream text-darkBrownText hover:bg-creamSemi50 hover:border-creamSemi50 focus-visible:border-ichiro   active:bg-creamSemi35 disabled:cursor-not-allowed disabled:bg-creamSemi35 disabled:text-darkBrownOverlay disabled:line-through bg-clip-padding':
             {},
         },
       });
