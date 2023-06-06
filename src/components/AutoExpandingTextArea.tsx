@@ -32,11 +32,11 @@ export const AutoExpandingTextArea = ({
 
   return (
     <form
-      className={`flex w-full flex-1 flex-row content-between items-start gap-8 rounded-xl border-2 border-solid border-cream p-6 text-cream`}
+      className={`flex w-full flex-1 flex-row content-between items-start gap-8 rounded-xl border-2 border-solid border-cream p-3 text-cream`}
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <ChatIcon width="40" height="40" className="mt-4" />
+      <ChatIcon width="40" height="40" className="ml-2 mt-4" />
 
       <label htmlFor={IDENTIFIER} className="sr-only">
         {label}
