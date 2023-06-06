@@ -131,7 +131,7 @@ export default function Page() {
     await animationControls.start({ opacity: 0 }, { duration: 0.4 });
     await animationControls.start(
       { opacity: 1 },
-      { duration: 0.4, delay: 1.5 },
+      { duration: 0.4, delay: 1.6 },
     );
   }, [animationControls]);
 
@@ -147,8 +147,6 @@ export default function Page() {
           ...prev,
           27: { Y: 'indeterminate', N: true },
         }));
-
-        setStep('0.1');
       }
 
       if (clipboardState[28].Y === true) {
@@ -156,10 +154,8 @@ export default function Page() {
           ...prev,
           28: { Y: 'indeterminate', N: true },
         }));
-
-        setStep('0.1');
       }
-    }, 1000);
+    }, 500); // 100ms after the 400ms animation
 
     return () => clearTimeout(timeout);
   }, [animateClipBoard, clipboardState]);
@@ -171,9 +167,6 @@ export default function Page() {
     questionNumber: 27 | 28,
     nextState: ClipboardQuestionState,
   ) => {
-    if (!isQ27Asked && questionNumber === 27) markQ27Asked();
-    if (!isQ28Asked && questionNumber === 28) markQ28Asked();
-
     if (nextState.N === true && remainingQuestions.includes(questionNumber)) {
       setTranscript((prev) => [
         ...prev,
@@ -198,9 +191,12 @@ export default function Page() {
       ...prev,
       [questionNumber]: nextState,
     }));
-  };
 
-  console.log({ customQuestionBudget });
+    if (!isQ27Asked && questionNumber === 27) markQ27Asked();
+    if (!isQ28Asked && questionNumber === 28) markQ28Asked();
+
+    setStep('0.1');
+  };
 
   return (
     <div className="relative h-screen w-screen bg-[url('/images/bg1.png')] bg-cover text-lg sm:text-xl md:text-3xl">
@@ -340,28 +336,40 @@ export default function Page() {
                               </p>
                             ) : (
                               <>
-                                <div className="flex w-full flex-col gap-4 sm:w-[unset] sm:flex-row sm:gap-16">
-                                  <Tooltip content={`Question 27: ${cms.q27}`}>
-                                    <Button
-                                      onClick={goToQ27}
-                                      disabled={isQ27Asked}
-                                    >
-                                      {isQ27Asked
-                                        ? 'Question 27 Answered'
-                                        : 'Ask Question 27'}
-                                    </Button>
-                                  </Tooltip>
+                                <div className="flex w-full flex-col items-center justify-center gap-4 sm:w-[unset] sm:flex-row sm:gap-16">
+                                  {isQ27Asked && isQ28Asked ? (
+                                    <ProcessIchiroButton
+                                      onClick={processIchiro}
+                                    />
+                                  ) : (
+                                    <>
+                                      <Tooltip
+                                        content={`Question 27: ${cms.q27}`}
+                                      >
+                                        <Button
+                                          onClick={goToQ27}
+                                          disabled={isQ27Asked}
+                                        >
+                                          {isQ27Asked
+                                            ? 'Question 27 Answered'
+                                            : 'Ask Question 27'}
+                                        </Button>
+                                      </Tooltip>
 
-                                  <Tooltip content={`Question 28: ${cms.q28}`}>
-                                    <Button
-                                      onClick={goToQ28}
-                                      disabled={isQ28Asked}
-                                    >
-                                      {isQ28Asked
-                                        ? 'Question 28 Answered'
-                                        : 'Ask Question 28'}
-                                    </Button>
-                                  </Tooltip>
+                                      <Tooltip
+                                        content={`Question 28: ${cms.q28}`}
+                                      >
+                                        <Button
+                                          onClick={goToQ28}
+                                          disabled={isQ28Asked}
+                                        >
+                                          {isQ28Asked
+                                            ? 'Question 28 Answered'
+                                            : 'Ask Question 28'}
+                                        </Button>
+                                      </Tooltip>
+                                    </>
+                                  )}
 
                                   {!hasChatBudget && <TranscriptDialogButton />}
                                 </div>
