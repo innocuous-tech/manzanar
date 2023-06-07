@@ -62,7 +62,7 @@ export default function Page() {
   const themeColors = Object.keys(theme?.colors ?? {});
 
   return (
-    <div className="flex w-full flex-col gap-3 place-self-start p-3 pt-32">
+    <div className="flex w-full flex-col gap-3 p-3 pt-32">
       {/**
        * This is a little funny, but we reference many values ONLY in a dynamic manner and so
        * PostCSS strips them. We have used all of them (invisibly) so that they are not

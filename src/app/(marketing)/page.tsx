@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 text-center">
+    <div className="flex flex-col items-center justify-center gap-6 place-self-center text-center">
       <h1 className="px-3">
         {`Start your conversation with `}
         <span className="text-ichiro">Ichiro</span>

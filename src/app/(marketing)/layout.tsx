@@ -23,7 +23,7 @@ export default function MarketingLayout({ children }: PropsWithChildren) {
         </div>
       </nav>
 
-      <main className="grid place-items-center text-3xl h-view md:text-4xl">
+      <main className="grid place-items-start text-3xl h-view md:text-4xl">
         {children}
       </main>
     </div>
