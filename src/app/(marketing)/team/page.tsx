@@ -165,12 +165,13 @@ export default function Page() {
         <h1 className="typography-title">Team</h1>
 
         <ul className="flex flex-col gap-24 lg:gap-28">
-          {team.map((member) => (
+          {team.map((member, index) => (
             <li key={member.name} className="flex flex-wrap gap-6 lg:gap-10">
               <Image
                 src={member.imgSrc}
                 width={234}
                 height={234}
+                priority={index === 0 || index === 1}
                 alt=""
                 className="h-[234px] w-[234px]"
               />
