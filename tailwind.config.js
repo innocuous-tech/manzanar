@@ -60,7 +60,7 @@ module.exports = {
             {},
         },
         '.bottom-panel': {
-          '@apply typography-body rounded-xl shadow-drop flex flex-col items-start p-4 lg:p-6 bg-darkBrownOverlay relative gap-3 [&>.ichiro-statement]:mr-[10rem] lg:[&>.ichiro-statement]:mr-[12rem] [&>.ichiro-statement]:overflow-y-auto max-h-[5.75rem] lg:max-h-[9rem]':
+          '@apply typography-body rounded-xl shadow-drop flex flex-col items-start p-4 lg:p-6 bg-darkBrownOverlay relative gap-3 [&>.ichiro-statement]:mr-[10rem] lg:[&>.ichiro-statement]:mr-[12.5rem] [&>.ichiro-statement]:overflow-y-auto max-h-[5.75rem] lg:max-h-[9rem]':
             {},
         },
         '.pinned-bottom-panel': {

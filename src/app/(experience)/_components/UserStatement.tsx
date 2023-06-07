@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
 export const UserStatement = ({
@@ -6,7 +5,7 @@ export const UserStatement = ({
   className,
 }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <p className={clsx(className, 'overflow-y-auto')}>
+    <p className={className}>
       <span className="typography-name">You: </span>
       <>{typeof children === 'string' ? children.trim() : children}</>
     </p>
