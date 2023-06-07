@@ -27,6 +27,8 @@
 @layer components {
   /* Firefox */
   .custom-scrollbar {
+    padding: 1px;
+    height: 102% !important;
     scrollbar-width: thin;
     scrollbar-color: theme('colors.cream') theme('colors.creamSemi50');
   }

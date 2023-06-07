@@ -120,8 +120,9 @@ export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
             'w-[100vh]',
             'max-w-[unset]',
             'translate-y-[12vh]',
-            '2xl:translate-y-[20vh]',
-            '2xl:w-[50vw]',
+            'xl:translate-y-[15vh]',
+            'xl:w-auto',
+            'xl:h-[100vh]',
           )}
         />
       </motion.div>
