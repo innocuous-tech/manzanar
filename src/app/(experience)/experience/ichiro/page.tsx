@@ -10,6 +10,7 @@ import { ProcessIchiroButton } from '@/app/(experience)/_components/ProcessIchir
 import { Q27 } from '@/app/(experience)/_components/Q27';
 import { Q28 } from '@/app/(experience)/_components/Q28';
 import { QCustom } from '@/app/(experience)/_components/QCustom';
+import { TopPanel } from '@/app/(experience)/_components/TopPanel';
 import { TranscriptDialogButton } from '@/app/(experience)/_components/TranscriptDialogButton';
 import {
   Transcript,
@@ -199,7 +200,7 @@ export default function Page() {
   };
 
   return (
-    <div className="relative h-screen w-screen bg-[url('/images/bg1.png')] bg-cover text-lg sm:text-xl md:text-3xl">
+    <div className="relative w-screen bg-[url('/images/bg1.png')] bg-cover text-lg h-view md:text-3xl lg:text-xl">
       <AnimatePresence>
         {!isTranscriptVisible && (
           <motion.div
@@ -217,7 +218,7 @@ export default function Page() {
                 <DialogTrigger asChild>
                   <IconButton
                     className={clsx(
-                      'absolute right-4 top-4 sm:right-8 sm:top-8',
+                      'absolute right-4 top-4 lg:right-8 lg:top-8',
                       { ['hidden']: isMenuVisible },
                     )}
                     label="Open Menu"
@@ -237,22 +238,29 @@ export default function Page() {
         )}
       </AnimatePresence>
 
+      <div className="absolute inset-0 z-50 flex h-full w-full items-center justify-center bg-darkBrownOverlay p-8 text-center lg:visible landscape:invisible">
+        <h2 className="max-w-[50ch]">
+          Please rotate your device or resize your browser window to enjoy the
+          experience.
+        </h2>
+      </div>
+
       <Dialog onOpenChange={setIsTranscriptVisible}>
         <TranscriptDialogContent transcript={transcript} />
 
         <AnimatePresence>
           {!isTranscriptVisible && (
             <motion.div
-              className="mx-auto h-full p-4 pt-[6rem] sm:max-w-[calc(100%-(64px*3))] sm:px-16 sm:py-8"
+              className="mx-auto h-full p-4 lg:max-w-[calc(100%-(64px*3))] lg:px-16 lg:py-8"
               initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="relative z-20 h-full">
+              <div className="pointer-events-none relative z-20 h-full portrait:invisible landscape:visible">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={step}
-                    className="flex h-full flex-col justify-between"
+                    className="flex h-full flex-col justify-between [&>*]:pointer-events-auto"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -260,7 +268,7 @@ export default function Page() {
                   >
                     {step === '0.0' && (
                       <>
-                        <aside className="panel block">{cms.start}</aside>
+                        <TopPanel>{cms.start}</TopPanel>
 
                         <motion.section
                           className="bottom-panel"
@@ -269,7 +277,9 @@ export default function Page() {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.4, delay: 1 }}
                         >
-                          <IchiroStatement>{cms['0.0']}</IchiroStatement>
+                          <IchiroStatement className="custom-scrollbar">
+                            {cms['0.0']}
+                          </IchiroStatement>
 
                           <ContinueButton onClick={() => setStep('0.1')} />
                         </motion.section>
@@ -282,7 +292,7 @@ export default function Page() {
                       step === '2.3') && (
                       <>
                         {mostRecentTranscriptEntry && (
-                          <aside className="panel block">
+                          <TopPanel>
                             {mostRecentTranscriptEntry.origin === 'ichiro' ? (
                               <IchiroStatement>
                                 {mostRecentTranscriptEntry.message}
@@ -292,13 +302,13 @@ export default function Page() {
                                 {mostRecentTranscriptEntry.message}
                               </UserStatement>
                             )}
-                          </aside>
+                          </TopPanel>
                         )}
 
                         <div className="fixed inset-0 top-[unset]">
                           {/* Clipboard Here - Note: `right` and `scale` are directly related */}
                           <motion.aside
-                            className="absolute -right-4 -top-[28rem] flex hidden h-[28rem] w-96 origin-bottom scale-75 flex-col bg-[url('/images/clipboard.webp')] bg-cover md:block xl:right-4 xl:scale-90 2xl:right-8 2xl:scale-100"
+                            className="absolute -right-24 -top-[20rem] flex h-[20rem] w-96 origin-bottom scale-[0.4] flex-col bg-[url('/images/clipboard.webp')] bg-cover lg:-right-4 lg:-top-[28rem] lg:h-[28rem] lg:scale-[0.6] xl:right-4 xl:scale-90 2xl:right-20 2xl:scale-125"
                             animate={animationControls}
                           >
                             <div className="typography-clipboard flex flex-col gap-4 px-8 pt-48 text-darkBrownText">
@@ -308,7 +318,7 @@ export default function Page() {
                                 INTERROGATE ICHIRO
                               </header>
 
-                              <div className="flex flex-col gap-3">
+                              <div className="flex gap-6 lg:flex-col lg:gap-3">
                                 <ClipboardQuestion
                                   label="Question 27:"
                                   fieldState={clipboardState[27]}
@@ -329,14 +339,14 @@ export default function Page() {
                             </div>
                           </motion.aside>
 
-                          <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 sm:gap-8 sm:px-16 sm:py-12">
+                          <section className="pinned-bottom-panel">
                             {step.startsWith('clipboard') ? (
                               <p className="flex w-full items-center justify-center">
                                 {cms.clipboard}
                               </p>
                             ) : (
                               <>
-                                <div className="flex w-full flex-col items-center justify-center gap-4 sm:w-[unset] sm:flex-row sm:gap-16">
+                                <div className="flex w-full flex-row items-center justify-center gap-4 lg:w-[unset] lg:gap-16">
                                   {isQ27Asked && isQ28Asked ? (
                                     <ProcessIchiroButton
                                       onClick={processIchiro}
@@ -375,7 +385,7 @@ export default function Page() {
                                 </div>
 
                                 {hasChatBudget && (
-                                  <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
+                                  <div className="flex w-full items-center gap-4 lg:max-w-[var(--usualMaxWidth)] lg:gap-8">
                                     <AutoExpandingTextArea
                                       label="Custom message for Ichiro. Please note that hitting ENTER will submit the form."
                                       onSubmit={({ aetextarea }) => {
@@ -459,7 +469,7 @@ export default function Page() {
                     {step === 'prompt-process' && (
                       <>
                         {mostRecentTranscriptEntry && (
-                          <aside className="panel block">
+                          <TopPanel>
                             {mostRecentTranscriptEntry.origin === 'ichiro' ? (
                               <IchiroStatement>
                                 {mostRecentTranscriptEntry.message}
@@ -469,19 +479,19 @@ export default function Page() {
                                 {mostRecentTranscriptEntry.message}
                               </UserStatement>
                             )}
-                          </aside>
+                          </TopPanel>
                         )}
 
                         <div className="fixed inset-0 top-[unset]">
-                          <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 sm:gap-8 sm:px-16 sm:py-12">
-                            <div className="flex w-full items-center justify-center gap-9 sm:w-[unset]">
+                          <section className="relative z-10 flex flex-col items-center gap-6 bg-darkBrownOverlay p-4 lg:gap-8 lg:px-16 lg:py-12">
+                            <div className="flex w-full items-center justify-center gap-9 lg:w-[unset]">
                               <ProcessIchiroButton onClick={processIchiro} />
 
                               {!hasChatBudget && <TranscriptDialogButton />}
                             </div>
 
                             {hasChatBudget && (
-                              <div className="flex w-full items-center gap-6 sm:max-w-[var(--usualMaxWidth)] sm:gap-10">
+                              <div className="flex w-full items-center gap-4 lg:max-w-[var(--usualMaxWidth)] lg:gap-8">
                                 <AutoExpandingTextArea
                                   label="Custom message for Ichiro. Please note that hitting ENTER will submit the form."
                                   onSubmit={({ aetextarea }) => {
@@ -500,9 +510,9 @@ export default function Page() {
 
                     {step === 'process' && (
                       <>
-                        <aside className="panel block">
+                        <TopPanel>
                           <UserStatement>{cms.processIchiro}</UserStatement>
-                        </aside>
+                        </TopPanel>
 
                         <motion.section
                           className="bottom-panel"
@@ -511,7 +521,9 @@ export default function Page() {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.4, delay: 1 }}
                         >
-                          <IchiroStatement>{cms['0.3']}</IchiroStatement>
+                          <IchiroStatement className="custom-scrollbar">
+                            {cms['0.3']}
+                          </IchiroStatement>
 
                           <Link href="/experience/media/video-2">
                             <ContinueButton>Dimiss Ichiro</ContinueButton>

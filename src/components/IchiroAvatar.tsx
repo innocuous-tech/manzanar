@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -114,7 +115,14 @@ export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
         <img
           src={`/images/ichiro/draft${draftNumber}.png`}
           alt=""
-          className="h-auto w-[90vh] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh] md:w-[max(500px,75%)] md:max-w-[70rem]"
+          className={clsx(
+            'h-auto',
+            'w-[100vh]',
+            'max-w-[unset]',
+            'translate-y-[12vh]',
+            '2xl:translate-y-[20vh]',
+            '2xl:w-[50vw]',
+          )}
         />
       </motion.div>
     </AnimatePresence>

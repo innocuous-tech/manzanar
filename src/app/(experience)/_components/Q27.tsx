@@ -45,10 +45,14 @@ export const Q27 = ({
 
       <section className="bottom-panel">
         {visibleStatement.origin === 'user' && (
-          <UserStatement>{visibleStatement.message}</UserStatement>
+          <UserStatement className="custom-scrollbar">
+            {visibleStatement.message}
+          </UserStatement>
         )}
         {visibleStatement.origin === 'ichiro' && (
-          <IchiroStatement>{visibleStatement.message}</IchiroStatement>
+          <IchiroStatement className="custom-scrollbar">
+            {visibleStatement.message}
+          </IchiroStatement>
         )}
 
         {hasResponse && (

@@ -5,14 +5,14 @@ import { PropsWithChildren } from 'react';
 export default function MarketingLayout({ children }: PropsWithChildren) {
   return (
     <div className="text-cream">
-      <nav className="absolute left-0 right-0 top-0 flex items-center justify-between gap-4 px-8 py-8 text-lg sm:gap-6 sm:px-[6rem] sm:py-14 sm:text-xl md:text-3xl">
+      <nav className="absolute left-0 right-0 top-0 flex items-center justify-between gap-4 px-8 py-8 text-lg md:text-3xl lg:gap-6 lg:px-[6rem] lg:py-14 lg:text-xl">
         <div>
           <Link href="/" className="uppercase">
             Project Manzanar
           </Link>
         </div>
 
-        <div className="flex items-center justify-between gap-4 sm:gap-12">
+        <div className="flex items-center justify-between gap-4 lg:gap-12">
           <LinkWithActiveRouteStyles href="/about">
             About
           </LinkWithActiveRouteStyles>
@@ -23,7 +23,7 @@ export default function MarketingLayout({ children }: PropsWithChildren) {
         </div>
       </nav>
 
-      <main className="grid h-screen place-items-center text-3xl md:text-4xl">
+      <main className="grid place-items-center text-3xl h-view md:text-4xl">
         {children}
       </main>
     </div>

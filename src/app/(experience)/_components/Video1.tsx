@@ -56,7 +56,7 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
       </AnimatePresence>
 
       <div className="absolute inset-0 grid h-full w-full place-items-center overflow-clip">
-        <div className="h-screen w-full bg-[url('/images/bg1.png')] bg-cover">
+        <div className="w-full bg-[url('/images/bg1.png')] bg-cover h-view">
           <AnimatePresence onExitComplete={() => push(nextPath)}>
             {!hasEnded && (
               <motion.video

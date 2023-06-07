@@ -5,7 +5,7 @@ import { ReactComponent as TranscriptIcon } from 'public/icons/transcript.svg';
 export const TranscriptDialogButton = () => {
   return (
     <DialogTrigger asChild>
-      <IconButton label="Open Transcript" className="hidden sm:block">
+      <IconButton label="Open Transcript" className="">
         <TranscriptIcon />
       </IconButton>
     </DialogTrigger>

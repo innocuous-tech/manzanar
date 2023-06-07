@@ -18,7 +18,7 @@ export const ContinueButton = ({
       onClick={onClick}
       className={clsx(
         className,
-        'group typography-tooltip absolute bottom-6 right-6 inline-flex items-end gap-4',
+        'group typography-tooltip absolute bottom-3 right-3 inline-flex items-end gap-4 lg:bottom-6 lg:right-6',
       )}
       type="button"
       {...props}
@@ -27,7 +27,7 @@ export const ContinueButton = ({
         {children ?? 'Continue'}
       </span>
 
-      <DownwardTriangleIcon className="h-5 w-5 animate-bounce sm:h-6 sm:w-6" />
+      <DownwardTriangleIcon className="h-5 w-5 animate-bounce lg:h-6 lg:w-6" />
     </button>
   );
 };

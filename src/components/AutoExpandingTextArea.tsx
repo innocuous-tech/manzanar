@@ -32,18 +32,18 @@ export const AutoExpandingTextArea = ({
 
   return (
     <form
-      className={`flex w-full flex-1 flex-row content-between items-start gap-8 rounded-xl border-2 border-solid border-cream p-3 text-cream`}
+      className="flex w-full flex-1 flex-row content-between items-start gap-8 rounded-xl border-2 border-solid border-cream p-2 text-cream lg:p-3"
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <ChatIcon width="40" height="40" className="ml-2 mt-4" />
+      <ChatIcon className="ml-2 mt-2 h-10 w-8 lg:mt-4 lg:h-10 lg:w-10" />
 
       <label htmlFor={IDENTIFIER} className="sr-only">
         {label}
       </label>
 
       <div
-        className="auto-expanding-textarea-parent after:custom-scrollbar mt-2 flex-1 after:content-[attr(data-replicated-value)]"
+        className="auto-expanding-textarea-parent after:custom-scrollbar flex-1 self-center after:content-[attr(data-replicated-value)]"
         /**
          * @see https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/
          */

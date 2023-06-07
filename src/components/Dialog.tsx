@@ -18,16 +18,16 @@ export const DialogContent = forwardRef<
     <DialogPrimitive.Content
       {...props}
       className={clsx(props.className, 'fixed z-30', {
-        ['left-[50%] top-[50%] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col-reverse items-end gap-6 rounded-xl bg-darkBrownOverlay py-12 pl-14 pr-6 shadow-overlay outline-none data-[state=closed]:animate-dialogContentHide data-[state=open]:animate-dialogContentShow sm:block sm:h-[calc(100%-8rem)] sm:w-[calc(100%-18rem)] sm:rounded-xl md:w-[calc(100%-24rem)]']:
+        ['left-[50%] top-[50%] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col-reverse items-end gap-6 bg-darkBrownOverlay py-6 pl-14 pr-6 shadow-overlay outline-none data-[state=closed]:animate-dialogContentHide data-[state=open]:animate-dialogContentShow md:w-[calc(100%-24rem)] lg:block lg:h-[calc(100%-8rem)] lg:w-[calc(100%-18rem)] lg:rounded-xl lg:py-12']:
           variant === 'default',
-        ['inset-0 grid h-screen w-screen place-items-center bg-menuOverlay data-[state=closed]:animate-toNoOpacity data-[state=open]:animate-toFullOpacity']:
+        ['inset-0 grid w-screen place-items-center bg-menuOverlay h-view data-[state=closed]:animate-toNoOpacity data-[state=open]:animate-toFullOpacity']:
           variant === 'full-screen-overlay',
       })}
       ref={forwardedRef}
     >
       <div
         className={clsx('overflow-y-auto text-cream', {
-          ['custom-scrollbar h-full pr-6']: variant === 'default',
+          ['custom-scrollbar h-full w-full pr-6']: variant === 'default',
         })}
       >
         {children}
@@ -36,9 +36,9 @@ export const DialogContent = forwardRef<
       <DialogPrimitive.Close asChild>
         <IconButton
           className={clsx({
-            ['bg-darkBrownOverlay shadow-overlay sm:absolute sm:-right-[7rem] sm:top-0 sm:shadow-overlay md:-right-[8rem]']:
+            ['bg-darkBrownOverlay shadow-overlay md:-right-[8rem] lg:absolute lg:-right-[7rem] lg:top-0 lg:shadow-overlay']:
               variant === 'default',
-            ['absolute right-8 top-8 shadow-overlay']:
+            ['absolute right-4 top-4 shadow-overlay lg:right-8 lg:top-8']:
               variant === 'full-screen-overlay',
           })}
           label="Close Dialog"

@@ -21,7 +21,7 @@ export default function Page() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 grid h-screen w-full place-items-center overflow-clip">
+      <div className="absolute inset-0 grid w-full place-items-center overflow-clip h-view">
         <video
           autoPlay
           controls

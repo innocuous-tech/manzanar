@@ -33,11 +33,11 @@ export const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
             ['border-none bg-darkBrownOverlay shadow-overlay disabled:border-none']:
               !isTransparent,
           },
-          'sm:[&>svg]:h-10',
-          'sm:[&>svg]:w-10',
+          'lg:[&>svg]:h-10',
+          'lg:[&>svg]:w-10',
           '[&>svg]:h-8',
           '[&>svg]:w-8',
-          '!sm:p-6',
+          '!lg:p-6',
           '!p-4',
         )}
         aria-label={label}
