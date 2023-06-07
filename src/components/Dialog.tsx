@@ -20,7 +20,7 @@ export const DialogContent = forwardRef<
       className={clsx(props.className, 'fixed z-30', {
         ['left-[50%] top-[50%] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col-reverse items-end gap-6 bg-darkBrownOverlay py-6 pl-14 pr-6 shadow-overlay outline-none data-[state=closed]:animate-dialogContentHide data-[state=open]:animate-dialogContentShow md:w-[calc(100%-24rem)] lg:block lg:h-[calc(100%-8rem)] lg:w-[calc(100%-18rem)] lg:rounded-xl lg:py-12']:
           variant === 'default',
-        ['relative mx-auto flex h-screen w-screen bg-darkBrownOverlay p-6 shadow-overlay outline-none data-[state=closed]:animate-dialogContentHide data-[state=open]:animate-dialogContentShow lg:w-full']:
+        ['relative mx-auto flex h-screen w-screen bg-darkBrownOverlay p-6 shadow-overlay outline-none data-[state=closed]:animate-toNoOpacity data-[state=open]:animate-toFullOpacity lg:w-full']:
           variant === 'tutorial',
         ['inset-0 grid w-screen place-items-center bg-menuOverlay h-view data-[state=closed]:animate-toNoOpacity data-[state=open]:animate-toFullOpacity']:
           variant === 'full-screen-overlay',
