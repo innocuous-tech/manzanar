@@ -200,7 +200,7 @@ export default function Page() {
   };
 
   return (
-    <div className="relative w-screen bg-[url('/images/bg1.png')] bg-cover text-lg h-view md:text-3xl lg:text-xl">
+    <div className="relative w-screen bg-[url('/images/bg1.webp')] bg-cover text-lg h-view md:text-3xl lg:text-xl">
       <AnimatePresence>
         {!isTranscriptVisible && (
           <motion.div

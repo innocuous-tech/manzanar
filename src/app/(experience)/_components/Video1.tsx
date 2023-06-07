@@ -71,7 +71,7 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
 
       <Dialog open={hasEnded} onOpenChange={() => push(nextPath)}>
         <div className="w-view absolute inset-0 grid place-items-center overflow-clip h-view">
-          <div className="w-full bg-[url('/images/bg1.png')] bg-cover h-view">
+          <div className="w-full bg-[url('/images/bg1.webp')] bg-cover h-view">
             <AnimatePresence>
               <>
                 {!hasEnded && (

@@ -34,7 +34,7 @@ export const RotatingIchiroAvatar = () => {
     <div className="pointer-events-none absolute inset-0 top-[unset] flex h-full w-full items-end justify-center overflow-hidden overflow-clip">
       <AnimatePresence mode="popLayout">
         <motion.img
-          src={`/images/ichiro/draft${currentNumber}.png`}
+          src={`/images/ichiro/draft${currentNumber}.webp`}
           key={`ichiro-${currentNumber}`}
           alt=""
           className="h-auto w-[90vh] max-w-[unset] translate-y-[10vh] sm:translate-y-[20vh] md:w-[max(500px,75%)] md:max-w-[70rem]"
@@ -113,7 +113,7 @@ export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
         transition={{ duration: 0.4 }}
       >
         <img
-          src={`/images/ichiro/draft${draftNumber}.png`}
+          src={`/images/ichiro/draft${draftNumber}.webp`}
           alt=""
           className={clsx(
             'h-auto',
