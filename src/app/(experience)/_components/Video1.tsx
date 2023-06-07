@@ -1,5 +1,6 @@
 'use client';
 
+import { cms } from '@/cms';
 import { Button } from '@/components/Button';
 import { Dialog, DialogContent } from '@/components/Dialog';
 import { IconButton } from '@/components/IconButton';
@@ -86,10 +87,7 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1 }}
                   >
-                    <source
-                      src="https://res.cloudinary.com/dprte0rm8/video/upload/v1685475768/v1_ojzsa5.mp4"
-                      type="video/mp4"
-                    />
+                    <source src={cms.video1Url} type="video/mp4" />
                     <track
                       default
                       src="/subtitles/v1.vtt"

@@ -1,5 +1,6 @@
 'use client';
 
+import { cms } from '@/cms';
 import { Button } from '@/components/Button';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
@@ -28,10 +29,7 @@ export default function Page() {
           disablePictureInPicture
           className="h-full w-full object-cover"
         >
-          <source
-            src="https://res.cloudinary.com/dprte0rm8/video/upload/v1685475575/v2_t7hdho.mp4"
-            type="video/mp4"
-          />
+          <source src={cms.video2Url} type="video/mp4" />
           <track default src="/subtitles/v2.vtt" kind="captions" srcLang="en" />
           Your browser does not support the video tag.
         </video>

@@ -1,4 +1,8 @@
 export const cms = {
+  video1Url:
+    'https://res.cloudinary.com/dprte0rm8/video/upload/v1686177039/v1_y86kvt.mp4',
+  video2Url:
+    'https://res.cloudinary.com/dprte0rm8/video/upload/v1686177054/v2_rtoruk.mp4',
   customQuestionBudget: 3,
   '0.0': `Hi. Let’s make this quick, alright?`,
   '0.2': `Look, I don’t want to waste time. I won’t risk my life for a country who took away my freedoms, and I will not forswear allegiance to an emperor I don’t even know. My answer is No and No. You know what you need to do.`,
