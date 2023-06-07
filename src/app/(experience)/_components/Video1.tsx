@@ -69,8 +69,7 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
         )}
       </AnimatePresence>
 
-      <Dialog open={hasEnded} onOpenChange={() => setHasEnded(false)}>
-        {/* <Dialog open={hasEnded} onOpenChange={() => push(nextPath)}> */}
+      <Dialog open={hasEnded} onOpenChange={() => push(nextPath)}>
         <div className="w-view absolute inset-0 grid place-items-center overflow-clip h-view">
           <div className="w-full bg-[url('/images/bg1.png')] bg-cover h-view">
             <AnimatePresence>
@@ -91,7 +90,7 @@ export const Video1 = ({ nextPath }: { nextPath: string }) => {
                     <track
                       default
                       src="/subtitles/v1.vtt"
-                      kind="captions"
+                      kind="metadata"
                       srcLang="en"
                     />
                     Your browser does not support the video tag.

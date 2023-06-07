@@ -1,16 +1,19 @@
 WEBVTT
 
 STYLE
-::cue { font-size: 2.25rem; font-family: '__Chivo_138542', '__Chivo_Fallback_138542', sans-serif; lineHeight: 1.15; color: #DEDBCD; background-color: #00000000; background: none; }
+::cue { visibility: hidden; background-image: linear-gradient(transparent, transparent); }
+::cue { background-color: transparent !important; color: white; }
+::cue-region { background-color: transparent !important; }
+::cue-background { background-color: transparent !important; }
 
 1
 00:00:00.291 --> 00:00:03.545
-February 19th, 1942,
+February 19th 1942,
 
 2
 00:00:03.545 --> 00:00:09.467
 Franklin D. Roosevelt
-signed and issued Executive Order 9066,
+signed and issued executive order 9066
 
 3
 00:00:09.467 --> 00:00:13.138
@@ -20,12 +23,12 @@ of at least 120,000 people
 4
 00:00:13.138 --> 00:00:17.684
 of Japanese descent,
-two thirds of them American citizens.
+two-thirds of them American citizens.
 
 5
 00:00:17.684 --> 00:00:20.812
 These people were stripped
-of their livelihood without due process
+of their livelihood without due process,
 
 6
 00:00:20.812 --> 00:00:23.815
@@ -33,56 +36,59 @@ in violation of their Fifth Amendment
 rights.
 
 7
-00:00:23.815 --> 00:00:27.736
+00:00:23.815 --> 00:00:28.445
 In 1943, the incarcerated were given
 a loyalty questionnaire
 
 8
-00:00:27.736 --> 00:00:31.156
+00:00:28.445 --> 00:00:32.407
 with questions 27
 and 28 being most controversial.
 
 9
-00:00:31.156 --> 00:00:32.824
+00:00:32.407 --> 00:00:34.075
 Question 27 asked
 
 10
-00:00:32.824 --> 00:00:37.829
+00:00:34.075 --> 00:00:37.829
 whether they would be willing
 to serve in combat for the United States.
 
 11
-00:00:37.829 --> 00:00:42.333
+00:00:37.829 --> 00:00:42.250
 Question 28 asked whether they
 would forswear allegiance to the Japanese emperor.
 
 12
-00:00:42.333 --> 00:00:46.212
-A loaded question asking about an emperor
-that ruled over land
+00:00:42.250 --> 00:00:46.212
+a loaded question, asking about an emperor that ruled over
 
 13
 00:00:46.212 --> 00:00:49.549
-that many of them
+a land that many of them
 have never stepped foot in.
 
 14
 00:00:49.549 --> 00:00:54.304
-Those who answer to no and no to
-those questions were called “No No”s.
+Those who answered No and No to
+those questions were called "No-No"s.
 
 15
-00:00:54.304 --> 00:00:59.100
-They were considered enemies of the state
-and taken to maximum security prisons.
+00:00:54.304 --> 00:00:56.473
+They were considered
+potential enemies of the state,
 
 16
-00:00:59.100 --> 00:01:02.645
-You're about to meet Ichiro,
-a fictional Japanese-American
+00:00:56.473 --> 00:00:59.100
+and taken to maximum security prisons.
 
 17
-00:01:02.645 --> 00:01:07.609
+00:00:59.100 --> 00:01:03.354
+You are about to meet Ichiro,
+a fictional Japanese American
+
+18
+00:01:03.354 --> 00:01:07.609
 incarcerated in the
 Manzanar concentration camp.
 

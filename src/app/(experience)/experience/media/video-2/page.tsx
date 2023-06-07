@@ -30,7 +30,7 @@ export default function Page() {
           className="h-full w-full object-cover"
         >
           <source src={cms.video2Url} type="video/mp4" />
-          <track default src="/subtitles/v2.vtt" kind="captions" srcLang="en" />
+          <track default src="/subtitles/v2.vtt" kind="metadata" srcLang="en" />
           Your browser does not support the video tag.
         </video>
       </div>
