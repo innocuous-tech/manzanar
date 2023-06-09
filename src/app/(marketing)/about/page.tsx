@@ -77,6 +77,19 @@ export default function Page() {
         novel application of generative AI technology will convey at least a
         part of the emotional story from the past.
       </p>
+
+      <p className="italic">
+        This experience has been made possible by funding from the Inworld
+        Character Grants.
+      </p>
+
+      <p className="italic">
+        Photographs used in the experience courtesy of the National Archives and
+        Records Administration, Library of Congress, National Park Service,
+        California State University San Bernardino Special Collections &
+        University Archives, The Frank Abe Collection, Center for Asian American
+        Media, and Flikr Creative Commons Images.
+      </p>
     </div>
   );
 }

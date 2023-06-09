@@ -8,7 +8,7 @@ export default function MarketingLayout({ children }: PropsWithChildren) {
       <nav className="absolute left-0 right-0 top-0 flex items-center justify-between gap-4 px-8 py-8 text-lg md:text-3xl lg:gap-6 lg:px-[6rem] lg:py-14 lg:text-xl">
         <div>
           <Link href="/" className="uppercase">
-            Project Manzanar
+            Moment in Manzanar
           </Link>
         </div>
 

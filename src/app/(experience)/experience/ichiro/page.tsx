@@ -526,7 +526,7 @@ export default function Page() {
                           </IchiroStatement>
 
                           <Link href="/experience/media/video-2">
-                            <ContinueButton>Dimiss Ichiro</ContinueButton>
+                            <ContinueButton>Dismiss Ichiro</ContinueButton>
                           </Link>
                         </motion.section>
                       </>

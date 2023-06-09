@@ -82,12 +82,11 @@ const team: TeamMember[] = [
     name: 'Cindy Shin',
     bio: (
       <>
-        Cindy is a product designer based in Brooklyn, NY. She joined the
-        Project Manzanar team due to her deep interest in exploring narratives
-        with a focus on social equity and underrepresented perspectives. Outside
-        of her work as a designer, Cindy’s favorite things to do are wheel
-        throwing ceramics, recommending new books to friends, and fostering
-        rescue dogs.
+        Cindy is a product designer based in Brooklyn, NY. She joined the Moment
+        in Manzanar team due to her deep interest in exploring narratives with a
+        focus on social equity and underrepresented perspectives. Outside of her
+        work as a designer, Cindy’s favorite things to do are wheel throwing
+        ceramics, recommending new books to friends, and fostering rescue dogs.
       </>
     ),
     socials: {
