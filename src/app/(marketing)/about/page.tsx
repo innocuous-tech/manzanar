@@ -4,8 +4,8 @@ export default function Page() {
       <h1 className="typography-title">About</h1>
 
       <p>
-        &ldquo;Moment in Manzanar&rdquo; is an interactive film powered by
-        generative AI that aims to provide a conversational experience. The
+        &ldquo;Moment in Manzanar&rdquo; is an interactive educational film,
+        featuring a conversational experience powered by a generative AI. The
         audience engages with &ldquo;Ichiro,&rdquo; a fictional Japanese
         American character representing the experience of incarceration in the
         Manzanar concentration camp during World War II. Ichiro is portrayed by
@@ -67,7 +67,7 @@ export default function Page() {
         </li>
       </ol>
 
-      <p>
+      <p className="pb-6">
         Responding &ldquo;No&rdquo; to both questions classified individuals as
         potential enemies of the state, leading to their confinement in
         maximum-security camps and social exclusion. Despite their significance
@@ -78,7 +78,7 @@ export default function Page() {
         part of the emotional story from the past.
       </p>
 
-      <p className="italic">
+      <p className="border-t-[1px] border-dashed border-ichiro pt-10 italic">
         This experience has been made possible by funding from the Inworld
         Character Grants.
       </p>
