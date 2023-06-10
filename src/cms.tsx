@@ -13,7 +13,7 @@ export const cms = {
   '2.4_yes28': `Are you kidding me? Give me that clipboard. My answer is no. I’m American. I can’t "forswear" allegiance to an emperor I’ve never sworn allegiance to.`,
   '2.6': `Oh, I guess you figured it out. Yeah, that’s right my answer is "No". I will not risk my life in combat for a country that doesn’t value mine.`,
   '2.7': `Yeah, mark me down as "No". It’s true, I won’t "forswear" my allegiance to the emperor...because I’ve never sworn allegiance!`,
-  clipboard: `Please fill in Ichiro's answer on the clipboard.`,
+  fillClipboard: `Please fill in Ichiro's answer on the clipboard.`,
   processIchiroButton: 'Process Ichiro',
   processIchiro: `Ichiro, I hereby declare you as a potential enemy of the state, and will be ordering you be sent to Tule Lake.`,
   q27: `Are you willing to serve on combat duty whenever ordered? Yes or no?`,

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
 export const UserStatement = ({
@@ -5,7 +6,7 @@ export const UserStatement = ({
   className,
 }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <p className={className}>
+    <p className={clsx(className, 'user-statement')}>
       <span className="typography-name">You: </span>
       <>{typeof children === 'string' ? children.trim() : children}</>
     </p>

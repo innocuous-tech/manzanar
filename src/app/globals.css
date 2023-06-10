@@ -27,10 +27,10 @@
 @layer components {
   /* Firefox */
   .custom-scrollbar {
-    padding: 1px;
-    height: 103% !important;
     scrollbar-width: thin;
     scrollbar-color: theme('colors.cream') theme('colors.creamSemi50');
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
 
   /* Chrome, Edge, and Safari */

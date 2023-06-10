@@ -56,11 +56,11 @@ module.exports = {
     plugin(({ addComponents, addUtilities }) => {
       addComponents({
         '.top-panel': {
-          '@apply typography-body rounded-xl shadow-drop block bg-darkBrownOverlay lg:m-0 mr-20 max-h-[4.75rem] lg:max-h-[8rem]':
+          '@apply typography-body rounded-xl shadow-drop block bg-darkBrownOverlay lg:m-0 mr-20 max-h-[5.5rem] lg:max-h-[8.5rem] overflow-y-hidden p-4 lg:p-6':
             {},
         },
         '.bottom-panel': {
-          '@apply typography-body rounded-xl shadow-drop flex flex-col items-start p-4 lg:p-6 bg-darkBrownOverlay relative gap-3 [&>.ichiro-statement]:mr-[10rem] lg:[&>.ichiro-statement]:mr-[12.5rem] [&>.ichiro-statement]:overflow-y-auto max-h-[5.75rem] lg:max-h-[9rem]':
+          '@apply typography-body rounded-xl shadow-drop flex flex-col items-start p-4 lg:p-6 bg-darkBrownOverlay relative gap-3 [&>.ichiro-statement]:mr-[8rem] [&>.ichiro-statement.dismiss-ichiro-button]:mr-[10rem] lg:[&>.ichiro-statement.dismiss-ichiro-button]:mr-[12.5rem] lg:[&>.ichiro-statement]:mr-[10rem] [&>.ichiro-statement]:overflow-y-auto [&>.user-statement]:overflow-y-auto max-h-[7rem] lg:max-h-[8.5rem]':
             {},
         },
         '.pinned-bottom-panel': {
@@ -69,7 +69,6 @@ module.exports = {
         },
         '.typography-title': {
           '@apply text-3xl lg:text-5xl': {},
-          lineHeight: '1.15',
         },
         '.typography-bio': {
           '@apply text-xl lg:text-[1.75rem]': {},
@@ -79,23 +78,19 @@ module.exports = {
         },
         '.typography-body': {
           '@apply text-xl lg:text-4xl': {},
-          lineHeight: '1.15',
         },
         '.typography-button': {
           '@apply text-xl lg:text-[2rem]': {},
-          lineHeight: '1.15',
         },
         '.typography-tooltip': {
           '@apply text-lg lg:text-2xl italic text-cream': {},
-          lineHeight: '1.15',
         },
         '.typography-name': {
-          '@apply text-2xl lg:text-[2.5rem] uppercase': {},
-          lineHeight: '1.15',
+          '@apply text-2xl lg:text-[2.5rem] uppercase leading-7 lg:leading-10':
+            {},
         },
         '.typography-clipboard': {
           '@apply text-lg lg:text-2xl': {},
-          lineHeight: '1.15',
           fontFamily: `'Courier New', Courier, monospace`,
           letterSpacing: '-5%',
         },

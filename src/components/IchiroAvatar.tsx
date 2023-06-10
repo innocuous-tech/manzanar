@@ -116,13 +116,16 @@ export const IchiroAvatar = ({ variant }: IchiroAvatarProps) => {
           src={`/images/ichiro/draft${draftNumber}.webp`}
           alt=""
           className={clsx(
-            'h-auto',
-            'w-[100vh]',
             'max-w-[unset]',
-            'translate-y-[12vh]',
-            'xl:translate-y-[15vh]',
-            'xl:w-auto',
+            'h-auto',
+            'w-[95vh]',
+            'translate-y-[15vh]',
+            'lg:h-auto',
+            'lg:w-[100vh]',
+            'lg:translate-y-[12vh]',
             'xl:h-[100vh]',
+            'xl:w-auto',
+            'xl:translate-y-[15vh]',
           )}
         />
       </motion.div>

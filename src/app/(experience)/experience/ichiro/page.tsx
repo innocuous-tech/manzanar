@@ -308,7 +308,7 @@ export default function Page() {
                         <div className="fixed inset-0 top-[unset]">
                           {/* Clipboard Here - Note: `right` and `scale` are directly related */}
                           <motion.aside
-                            className="absolute -right-24 -top-[20rem] flex h-[20rem] w-96 origin-bottom scale-[0.4] flex-col bg-[url('/images/clipboard.webp')] bg-cover lg:-right-4 lg:-top-[28rem] lg:h-[28rem] lg:scale-[0.6] xl:right-4 xl:scale-90 2xl:right-20 2xl:scale-125"
+                            className="absolute -right-24 -top-[21rem] flex h-[21rem] w-96 origin-bottom scale-[0.4] flex-col bg-[url('/images/clipboard.webp')] bg-cover lg:-right-4 lg:-top-[28rem] lg:h-[28rem] lg:scale-[0.6] xl:right-4 xl:scale-90 2xl:right-20 2xl:scale-125"
                             animate={animationControls}
                           >
                             <div className="typography-clipboard flex flex-col gap-4 px-8 pt-48 text-darkBrownText">
@@ -341,8 +341,8 @@ export default function Page() {
 
                           <section className="pinned-bottom-panel">
                             {step.startsWith('clipboard') ? (
-                              <p className="flex w-full items-center justify-center">
-                                {cms.clipboard}
+                              <p className="flex w-full items-center justify-center p-3">
+                                {cms.fillClipboard}
                               </p>
                             ) : (
                               <>
@@ -521,12 +521,16 @@ export default function Page() {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.4, delay: 1 }}
                         >
-                          <IchiroStatement className="custom-scrollbar">
+                          <IchiroStatement className="custom-scrollbar dismiss-ichiro-button">
                             {cms['0.3']}
                           </IchiroStatement>
 
                           <Link href="/experience/media/video-2">
-                            <ContinueButton>Dismiss Ichiro</ContinueButton>
+                            <ContinueButton>
+                              Dismiss
+                              <br />
+                              Ichiro
+                            </ContinueButton>
                           </Link>
                         </motion.section>
                       </>
