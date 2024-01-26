@@ -31,15 +31,16 @@ interface TeamMember {
 
 const team: TeamMember[] = [
   {
-    name: 'Kent Morita',
+    name: 'Kento',
     bio: (
       <>
-        Kent is the producer and creator of &ldquo;Moment in Manzanar&rdquo;.
+        Kento is the producer and creator of &ldquo;Moment in Manzanar&rdquo;.
         They are also a conversation designer based in New York, who has worked
-        on Google Assistant and Amazon Alexa.They are also an award-winning
+        on Google Assistant and Amazon Alexa. They are also an award-winning
         screenwriter, comedian, producer, and actor exploring the intersection
         of neurodiversity and Japanese-American identity, whose work you can
-        find on Amazon Prime, The Onion, Clickhole, and Caveat.
+        find at The Second City New York, Upright Citizens Brigade, Amazon
+        Prime, and The Onion.
       </>
     ),
     socials: {
@@ -48,15 +49,15 @@ const team: TeamMember[] = [
         src: 'https://www.linkedin.com/in/kentmorita',
       },
       instagram: {
-        label: '@kent_morita',
-        src: 'https://www.instagram.com/kent_morita',
+        label: '@kento.nyc',
+        src: 'https://www.instagram.com/kento.nyc',
       },
       website: {
-        label: 'kentmorita.com',
-        src: 'https://kentmorita.com/',
+        label: 'kento.nyc',
+        src: 'https://kento.nyc/',
       },
     },
-    imgSrc: '/images/team/kent.jpg',
+    imgSrc: '/images/team/kento.webp',
   },
   {
     name: 'Ben White',

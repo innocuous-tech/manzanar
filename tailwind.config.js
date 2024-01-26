@@ -108,6 +108,7 @@ module.exports = {
         },
       });
       addUtilities({
+        /** 100dvh or 100vh depending on support */
         '.h-view': {},
       });
     }),
